@@ -1,0 +1,42 @@
+.main-slider {
+    margin-bottom: 35px;
+
+    &__item {
+        position: relative;
+
+        > img {
+            display: block;
+        }
+    }
+
+    &__body {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        padding: 10px 15px;
+    }
+
+    &__title {
+        color: $color-orange;
+        font-family: $font-secondary;
+        font-size: 40px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    &__sub-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    &__description {
+        color: $color-blue;
+        font-size: 20px;
+        font-family: $font-secondary;
+        margin-bottom: 15px;
+    }
+}

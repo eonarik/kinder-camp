@@ -1,0 +1,96 @@
+.loader-wrapper {
+  position: fixed;
+  width: 325px;
+  top: 20px;
+  right: 20px;
+  z-index: 99;
+}
+
+.noty_theme__kinder-camp {
+  margin-bottom: 10px;
+  
+  .noty_body {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.2;
+    border-radius: 10px;
+
+    &:before {
+      font-family: 'FontAwesome';
+      min-width: 50px;
+      height: 50px;
+      display: block;
+      text-align: center;
+      line-height: 50px;
+      font-size: 24px;
+    }
+  }
+
+  &.noty_type__success {
+    .noty_body {
+      border: 1px solid #4caf50;
+      background: #e8f3db;
+      color: #4caf50;
+
+      &:before {
+        content: "\F00C";
+      }
+    }
+  }
+
+  &.noty_type__error {
+    .noty_body {
+      border: 1px solid #f44336;
+      background: #fdd9d7;
+      color: #f44336;
+
+      &:before {
+        content: "\F00D";
+      }
+    }
+  }
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.2;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 0;
+  
+  &__status {
+    &__icon {
+      width: 50px;
+      height: 50px;
+      display: block;
+      text-align: center;
+      line-height: 50px;
+      font-size: 24px;
+    }
+  }
+
+  &__text {
+    flex-grow: 1;
+  }
+
+  &--loading {
+    border: 1px solid #ff9800;
+    background: #fff3cd;
+    color: #ff9800;
+  }
+
+  &--danger {
+    border: 1px solid #f44336;
+    background: #fdd9d7;
+    color: #f44336;
+  }
+
+  &--success {
+    border: 1px solid #4caf50;
+    background: #e8f3db;
+    color: #4caf50;
+  }
+}

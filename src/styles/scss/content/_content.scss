@@ -1,0 +1,12 @@
+.content a {
+    color: $color-blue;
+    border-bottom: .1em solid;
+    text-decoration: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+        text-decoration: none;
+        color: darken($color-blue, 20%);
+    }
+}

@@ -1,0 +1,21 @@
+@import '../variables';
+
+.about {
+    padding: 30px 0;
+}
+
+.form-questions {
+    position: relative;
+    padding-left: 110px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        background-image: url($image-wash-kid);
+        width: 195px;
+        height: 190px;
+        top: 0;
+        left: -70px;
+        z-index: 0;
+    }
+}

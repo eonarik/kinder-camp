@@ -1,0 +1,120 @@
+.camps-filter {
+    display: flex;
+    flex-flow: fow wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: -5px;
+    margin-left: -5px;
+    margin-bottom: 16px;
+    
+    &__select {
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        letter-spacing: .5px;
+        
+        .select-simple__list {
+            margin-top: 35px;
+            max-height: none;
+            border-radius: 10px;
+            border: 1px solid $color-green;
+            color: $color-green;
+            background: #FFF;
+            padding: 5px 0;
+        }
+        
+        .select-simple__list-item {
+            padding: 5px 15px 5px 35px;
+            border-bottom: none;
+            
+            &:hover {
+                background: lighten($color-green, 40%);
+            }
+            
+            &:before {
+                content: '';
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                background: #FFF;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                border: 1px solid $color-green;
+            }
+            
+            &.is-current {
+                &:after {
+                    content: '';
+                    position: absolute;
+                    left: 14px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 8px;
+                    height: 8px;
+                    background: $color-green;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                }
+            }
+        }
+        
+        .select-simple__btn {
+            background: #fff;
+            border-radius: 10px;
+            padding: 4px 35px 4px 15px;
+            font-weight: 900;
+            margin-bottom: 0;
+            color: $color-green;
+            border: 1px solid $color-green;
+            
+            &:after {
+                width: 0;
+                height: 0;
+                border-color: $color-green transparent transparent transparent;
+                transform: none;
+                border-width: 8px 6px;
+                border-style: solid;
+                top: 22px;
+            }
+        }
+        
+        &--red {
+            .select-simple__btn {
+                color: #FFF;
+                border: 1px solid $color-red;
+                background: $color-red;
+                
+                &:after {
+                    border-top-color: #FFF;
+                }
+            }
+            
+            .select-simple__list {
+                background: $color-red;
+                border-color: $color-red;
+                color: #FFF;
+            }
+            
+            .select-simple__list-item {
+                &:hover {
+                    background: darken($color-red, 15%);
+                }
+                
+                &:before {
+                    border: none;
+                }
+                
+                &.is-current {
+                    &:after {
+                        background: $color-red;
+                    }
+                }
+            }
+        }
+    }
+}

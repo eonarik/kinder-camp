@@ -1,0 +1,24 @@
+.sidebar-widget {
+    margin-bottom: 30px;
+}
+
+.last-reviews {
+    
+    p {
+        margin-bottom: 15px;
+    }
+    
+    &__item {
+        margin-bottom: 15px;
+    }
+    
+    &__title {
+        margin-bottom: 15px;
+    }
+    
+    &__author {
+        font-weight: bold;
+        text-align: right;
+        font-size: 15px;
+    }   
+}

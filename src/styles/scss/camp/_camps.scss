@@ -1,0 +1,90 @@
+.camps {
+    &__item {
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        margin-bottom: 16px;
+    }
+    
+    &__title {
+        a {
+            font-size: 15px;
+            text-decoration: none;
+            border-bottom: 1px solid;
+            
+            &:active,
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+    
+    &__image {
+        img {
+            height: 210px;
+            width: 210px;
+            display: block;
+            max-width: initial;
+        }
+    }
+    
+    &__body {
+        background: $color-light-grey;
+        padding: 16px 24px;
+        width: calc(100% - 210px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    &__description {
+        display: flex;
+    }
+    
+    &__rating {
+        margin-right: 16px;
+        color: $color-dark-grey;
+    }
+    
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    &__price {
+        color: $color-dark-grey;
+        font-size: 18px;
+        font-family: $font-secondary;
+        
+        > span {
+            color: $color-red;
+            font-size: 20px;
+        }
+    }
+    
+    &__labels {
+        padding: 16px 24px;
+        background: $color-light-grey;
+    }
+    
+    &__label {
+        margin-bottom: 8px;
+        
+        &--age {
+            background: $color-yellow;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.2;
+            text-align: center;
+            padding: 10px 0;
+            font-family: "Futura Round";
+        }
+    }
+}

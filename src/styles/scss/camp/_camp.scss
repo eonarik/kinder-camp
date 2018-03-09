@@ -1,0 +1,308 @@
+.camp {
+    &__title {
+        font-size: 20px;
+        font-family: $font-secondary;
+        margin-bottom: 20px;
+    }
+}
+
+.camp-photos {
+    &__main,
+    &__small {
+        position: relative;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: $shadow-2dp;
+        transition: $animate-time;
+    
+        &:hover {
+            box-shadow: $shadow-6dp;
+        }
+        
+        img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            height: 100%;
+            min-width: 100%;
+            max-width: initial;
+        }
+    }
+    
+    &__main {
+        min-height: 370px;
+    }
+    
+    &__small {
+        height:calc(100% - 20px);
+    }
+}
+
+.camp-info {
+    margin-bottom: 30px;
+    
+    &__rating {
+        margin-bottom: 15px;
+    }
+    
+    &__price {
+        font-size: 30px;
+        color: $color-red;
+        font-family: $font-secondary;
+        line-height: 1.2;
+        
+        small {
+            display: block;
+            font-size: 15px;
+            color: $color-dark-grey;
+        }
+    }
+    
+    &__phone {
+        font-size: 20px;
+        text-decoration: none;
+        color: #000;
+        
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: none;
+            color: $color-red;
+        }
+    }
+    
+    &__social {
+        a {
+            margin-left: 26px;
+            position: relative;
+            
+            &:before {
+                font-family: 'FontAwesome';
+                color: $color-dark-grey;
+                position: absolute;
+                right: 100%;
+                top: 50%;
+                margin-right: 12px;
+                transform: translateY(-50%);
+            }
+        }
+        
+        a[href*='vk.ru/'],
+        a[href*='vk.com/'],
+        a[href*='vkontakte.ru/'] {
+            &:before {
+                content: "\f189";
+            }
+        }
+        
+        a[href*='instagram.com/'] {
+            &:before {
+                content: "\f16d";
+            }
+        }
+    }
+    
+    &__age {
+        display: inline-block;
+        background: $color-yellow;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 1.2;
+        text-align: center;
+        padding: 10px 0;
+        font-family: "Futura Round";
+    }
+}
+
+.camp-reviews {
+    background: #ecf8fa;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+
+    &:before,    
+    &:after {
+        content: '';
+        position: absolute;
+        background-image: url($image-wave-2);
+        left: 0;
+        right: 0;
+        height: 7px;
+    }
+    
+    &:before {
+        bottom: 100%;
+        margin-bottom: 15px;
+    }
+    
+    &:after {
+        top: 100%;
+        margin-top: 15px;
+    }
+}
+
+.camp-additional {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.vakansii .settings__subtitle{
+    color: #7d7d7d;  
+    font-family: Open Sans;
+    font-weight: normal;
+    font-size: 20px;
+}
+.vakansii .filter.vacancy-filter .select-simple__btn {
+    height: 42px;
+    padding: 12px 12px;
+}
+.vakansii .filter .select-simple__btn::after {
+    top: 28px;
+}
+.vakansii label {
+    margin-bottom: 10px;
+}
+textarea.form-control.text-prof{
+    height: 130px;
+}
+textarea.form-control.text-desc{
+    height: 230px;
+}
+.settings-block.block-net{
+    background: transparent;
+}
+.block-net .settings__group{
+    background: transparent;
+}
+.block-net input.vk {
+    padding-left: 40px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-image: url("/assets/components/modxsite/templates/kinder-camp/v1/images/vk.png");
+}
+.block-net input.fb {
+    padding-left: 40px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-image: url("/assets/components/modxsite/templates/kinder-camp/v1/images/fb.png");
+}
+.block-net input.ins {
+    padding-left: 40px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-image: url("/assets/components/modxsite/templates/kinder-camp/v1/images/ins.png");
+}
+.bron-filter.filter{
+    background-color: transparent;
+    box-shadow: none;
+}
+.block-bron{
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 15px 20px 10px;
+}
+.block-bron.control{
+    background-color: #fff36f;
+}
+.block-bron.confirm{
+    background-color: #ccff99;
+}
+.block-nomer-broni{
+    font-size: 17px;
+    font-weight: bold;
+}
+.block-nomer-broni span{
+    color: #62b956;
+    font-size: 31px;
+}
+.block-bron-kontact p{
+    margin: 10px 0 20px;
+}
+.block-bron-smena{
+    font-weight: bold;
+    margin-top: 10px;
+}
+.block-bron-smena span{
+    font-size: 20px;
+}
+.status{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.block-bron a.delete, .block-bron a.otziv{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.block-bron a.delete:hover{
+    background: #e95a50;
+}
+.block-more{
+    margin-top: 20px;
+    
+}
+.desc-block{
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+.desc-block a{
+    color: #62b956;
+    cursor: pointer;
+}
+.desc-block ul{
+    padding-left: 0;
+    list-style: none;
+}
+.desc-block li{
+    background-repeat: no-repeat;
+    background-image: url("/assets/components/modxsite/templates/kinder-camp/v1/images/point.png");
+    background-position: left center;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+p.line{
+    overflow: hidden;
+}
+p.line:after {
+    content: '';
+    display: inline-block;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    width: 100%;
+    height: 1px;
+    background: #6cbd83;
+    border: dashed #f9f9f9;
+    border-width: 1px 0px;
+}
+p.line:after {
+    margin-right: -100%;
+}
+.desc-block-bottom{
+    border-top: 1px solid #bababa;
+    padding-top: 30px;
+    margin-top: 180px;
+}
+.desc-block-bottom p{
+    margin: 0;
+}
+p.people-name{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.settings .form-control.date {
+    padding-left: 40px;
+    height: 34px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-image: url("/assets/components/modxsite/templates/kinder-camp/v1/images/date.png");
+}

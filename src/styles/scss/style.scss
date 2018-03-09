@@ -1,0 +1,32 @@
+@import '../../fonts/futura-round/style.css';
+@import '../../vendor/font.awesome/css/font-awesome-4.5.0.min.css';
+@import "../../../node_modules/noty/src/noty.scss";
+// @import "../../../node_modules/noty/src/themes/mint.scss";
+
+@import 'variables';
+
+@import 'global/global';
+@import 'global/owl-carousel';
+@import 'header/top-line';
+@import 'header/header';
+@import 'header/main-slider';
+@import 'content/content';
+@import 'content/filter';
+@import 'content/sales';
+@import 'content/rubric-list';
+@import 'content/feed-consult';
+@import 'content/card';
+@import 'content/infobox';
+@import 'content/about';
+@import 'content/sidebar';
+@import 'content/special-offers';
+@import 'footer/footer';
+@import 'camp/camps';
+@import 'camp/camps-filter';
+@import 'camp/camp';
+@import 'admin/settings';
+@import 'admin/admin';
+@import 'admin/admin__camp';
+@import 'admin/program-edit';
+@import 'ui/btn';
+@import 'ui/loader';

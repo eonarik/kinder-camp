@@ -1,0 +1,124 @@
+.footer {
+    background-image: url($image-wave), linear-gradient(to top, #cbebf4, rgba(0,0,0,0) 40%);
+    background-repeat: repeat-x, no-repeat;
+    background-position: left 250px, center top;
+    padding-top: 300px;
+    padding-bottom: 30px;
+    margin-top: -220px;
+    
+    > .container {
+        position: relative;
+        
+        &:after {
+            content: '';
+            position: absolute;
+            width: 167px;
+            height: 189px;
+            top: -180px;
+            left: -130px;
+            background-image: url($image-bg-footer-kid-1);
+        }
+        
+        &:before {
+            content: '';
+            position: absolute;
+            width: 364px;
+            height: 200px;
+            top: -150px;
+            right: -300px;
+            background-image: url($image-bg-footer-kid-2);
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin: 0 0 30px;
+        padding: 0;
+
+        > li {
+            display: inline-block;
+            padding: 5px 15px;
+            
+            > a {
+                border-bottom: 1px solid;
+                color: #000;
+                text-decoration: none;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    text-decoration: none;
+                    color: $color-red; 
+                }
+            }
+        }
+    }
+
+    &__job-time {
+        background-image: url($image-icon-job-time);    
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        padding-left: 50px;
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+
+    &__social {
+
+        &-link {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            color: #FFF;
+            background: #CCC;
+            text-align: center;
+            line-height: 34px;
+            font-size: 22px;
+
+            + .footer__social-link {
+                margin-left: 3px;
+            }
+
+            &:hover {
+                text-decoration: none;
+                color: #FFF;
+            }
+
+            &--vk {
+                background: #41658b;
+            }
+
+            &--ok {
+                background: #f4960f;
+            }
+
+            &--fb {
+                background: #39579a;
+            }
+
+            &--tw {
+                background: #00abf0;
+            }
+
+            &--gp {
+                background: #be3308;
+            }
+        }
+    }
+
+    &__phone {
+        margin-bottom: 15px;
+    }
+
+    &__place {
+        background-image: url($image-icon-pointer);
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        padding-left: 50px;
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+}

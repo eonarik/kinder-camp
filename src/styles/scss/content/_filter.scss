@@ -1,0 +1,70 @@
+.filter {
+    background: $color-main;
+    border-radius: 10px;
+    padding: 15px 20px 10px;
+    margin-bottom: 30px;
+    box-shadow: $shadow-2dp;
+
+    &__section {
+        margin-bottom: 10px;
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        font-weight: 900;
+    }
+
+    &__radio {
+        display: flex;
+        justify-content: space-between;
+
+        [type=radio] {
+            display: none;
+
+            &:checked ~ .filter__radio-label {
+                background: $color-red;
+                color: #FFF;
+            }
+        }
+
+        &-label {
+            display: inline-block;
+            background: #FFF;
+            border-radius: 10px;
+            cursor: pointer;
+            color: $color-blue;
+            padding: 4px 15px;
+        }
+    }
+
+    .select-simple {
+        width: 100%;
+        min-width: unset;
+
+        &__btn {
+            background: #FFF;
+            border-radius: 10px;
+            padding: 4px 15px;
+            color: $color-blue;
+            font-weight: normal;
+            border: none;
+            margin-bottom: 0;
+
+            &:after {
+                width: 0;
+                height: 0;
+                border-color: $color-red transparent transparent transparent;
+                transform: none;
+                border-width: 8px 6px;
+                border-style: solid;
+                top: 22px;
+            }
+        }
+
+        &__list-item {
+            &.is-current {
+                background: #EFEFEF;
+            }
+        }
+    }
+}

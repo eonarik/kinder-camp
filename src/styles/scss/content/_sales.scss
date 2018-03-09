@@ -1,0 +1,36 @@
+.sales {
+    &__item {
+        background: $color-light-grey;
+        border-radius: 10px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        box-shadow: $shadow-2dp;
+    }
+
+    &__title {
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    &__rating {
+        &-text {
+            font-size: 13px;
+            color: $color-dark-grey;
+        }
+    }
+
+    &__info {
+        color: $color-grey;
+        font-family: $font-secondary;
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    &__price {
+        color: $color-red;
+    }
+}

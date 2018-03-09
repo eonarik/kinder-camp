@@ -1,0 +1,23 @@
+.feed-consult {
+    background-image: url($image-wave-2), url($image-bg-happy-kids);
+    background-position: left 130px, center top;
+    background-repeat: repeat-x, no-repeat;
+    margin-top: -100px;
+    margin-bottom: 30px;
+    padding-top: 190px;
+    padding-bottom: 60px;
+
+    &__title {
+        font-family: $font-secondary;
+        font-size: 35px;
+        text-transform: uppercase;
+        color: $color-secondary;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+
+    &__subtitle {
+        font-weight: bold;
+        font-size: 24px;
+    }
+}

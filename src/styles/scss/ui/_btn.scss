@@ -1,0 +1,171 @@
+.btn {
+    transition: $animate-time;
+    box-shadow: $shadow-2dp;
+    border: none;
+    
+    &:hover {
+        box-shadow: $shadow-6dp;
+    }
+    
+    &-rounded {
+        border-radius: 10px;
+    }
+
+    &-sm {
+        padding: 5px 17px;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    &-success {
+        border: none;
+        color: #FFF;
+        background-color: $color-secondary;
+
+        &:hover {
+            border: none;
+        }
+    }
+
+    &-warning {
+        background: $color-orange;
+        border: none;
+    }
+
+    &-info {
+        background-color: $color-sea;
+    }
+
+    &-link {
+        display: inline;
+        padding: 0;
+        background: none;
+        box-shadow: none;
+        border-bottom: 1px solid;
+        font-size: 13px;
+        font-family: $font-secondary;
+        color: $color-dark-blue;
+
+        &:hover,
+        &:active,
+        &:focus {
+            box-shadow: none;
+            text-decoration: none;
+            border-bottom: 1px solid;
+        }
+    }
+    
+    &-icon {
+        font-size: 13px;
+        padding: 0;
+        border: none;
+        line-height: 20px;
+        white-space: nowrap;
+        color: $color-dark-blue;
+        font-family: $font-secondary;
+        box-shadow: none;
+        
+        > span {
+            border-bottom: 1px solid;
+        }
+        
+        &:before {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+            margin-right: 8px;
+            box-shadow: $shadow-2dp;
+            transition: .3s;
+        }
+        
+        &--add {
+            margin-bottom: 20px;
+        
+            &:before {
+                background-image: url($image-icon-plus-blue);
+                height: 21px;
+                width: 21px;
+                border-radius: 50%;
+            }
+        
+            &:hover,
+            &:active,
+            &:focus {
+                box-shadow: none;
+                
+                &:before {
+                    box-shadow: $shadow-4dp;
+                }
+            }
+        }
+        
+        &--edit {
+            &:before {
+                background-image: url($image-icon-edit-blue);
+                height: 21px;
+                width: 21px;
+                border-radius: 50%;
+            }
+        
+            &:hover,
+            &:active,
+            &:focus {
+                box-shadow: none;
+                
+                &:before {
+                    box-shadow: $shadow-4dp;
+                }
+            }
+        }
+        
+        &--delete {
+            &:before {
+                background-image: url($image-icon-close-red);
+                height: 21px;
+                width: 21px;
+                border-radius: 50%;
+            }
+        
+            &:hover,
+            &:active,
+            &:focus {
+                box-shadow: none;
+                
+                &:before {
+                    box-shadow: $shadow-4dp;
+                }
+            }
+        }
+
+        &--hide {
+            background: none;
+
+            &:before {
+                display: none;
+            }
+
+            &:after {
+                content: '';
+                background-image: url($image-icon-hide-blue);
+                height: 10px;
+                width: 14px;
+                display: inline-block;
+                vertical-align: middle;
+                background-repeat: no-repeat;
+                margin-left: 8px;
+                transition: .3s;
+            }
+        
+            &:hover,
+            &:active,
+            &:focus {
+                box-shadow: none;
+                
+                &:before {
+                    box-shadow: $shadow-4dp;
+                }
+            }
+        }
+    }
+}

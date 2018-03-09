@@ -1,0 +1,45 @@
+.special-offers {
+    margin-bottom: 15px;
+
+    &__nav  {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+
+        > li {
+            > a {
+                display: block;
+                margin: 0 10px;
+                font-family: $font-secondary;
+                color: $color-secondary;
+                border: 1px solid $color-secondary;
+                border-radius: 10px;
+                padding: 12px 16px;
+                margin-bottom: 20px;
+                font-size: 15px;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    background: lighten($color-secondary, 40%);
+                    text-decoration: none;
+                }
+            }
+
+            &.active {
+                > a {
+                    color: #FFF;
+                    border-color: $color-red;
+                    background: $color-red;
+
+                    &:hover {
+                        background: $color-red;
+                    }
+                }
+            }
+        }
+    }
+}
