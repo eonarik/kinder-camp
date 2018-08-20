@@ -1,0 +1,15 @@
+.table {
+  &-form {
+    td,th {
+      padding: 7px 10px 5px !important;
+      border: 1px solid #CCC;
+    }
+
+    .form-control,.btn {
+      border: none;
+      border-radius: 0 !important;
+      margin: -7px -10px -5px;
+      width: calc(100% + 20px);
+    }
+  }
+}

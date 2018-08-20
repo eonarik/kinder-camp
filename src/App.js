@@ -1,17 +1,49 @@
 import React, { Component } from 'react';
 
 import { Container } from "flux/utils";
-import CampStore from "./data/CampStore.js";
-import RequestStore from "./data/RequestStore.js";
-import ProgramStore from "./data/ProgramStore.js";
-import Actions from './data/Actions';
+import Actions from "./data/Actions";
+import RequestStore from "./data/RequestStore";
+import UserStore from "./data/UserStore";
 
-import CampsList from './components/Camps/CampsList';
-import ProgramsList from './components/Programs/ProgramsList';
+import Camps from './components/Camps';
+import Lk from './components/Lk';
+import Vacancies from './components/Vacancies';
+import Reservations from './components/Reservations';
 
 import './styles/scss/style.css';
 
-const _TRANS = require('./const/trans');
+import _TRANS from "./const/trans";
+
+const tabs = {
+  1: {
+    pagetitle: 'Личный кабинет',
+    uri: '/lk/',
+  },
+  2: {
+    pagetitle: 'Детские лагеря',
+    uri: '/lk/detskie-lagerya.html',
+  },
+  3: {
+    pagetitle: 'Бронирования',
+    uri: '/lk/bronirovaniya.html',
+  },
+  4: {
+    pagetitle: 'Вожатые',
+    uri: '/lk/vozhatyie.html',
+  },
+  5: {
+    pagetitle: 'Вакансии',
+    uri: '/lk/vakansii.html',
+  },
+  6: {
+    pagetitle: 'Отзывы и статистика',
+    uri: '/lk/otzyivyi-i-statistika.html',
+  },
+  7: {
+    pagetitle: 'Сообщения',
+    uri: '/lk/soobshheniya.html',
+  },
+};
 
 class Message extends Component {
   static defaultProps = {
@@ -58,55 +90,86 @@ class Message extends Component {
 class App extends Component {
 
   static getStores() {
-    return [CampStore, ProgramStore, RequestStore];
+    return [RequestStore,UserStore];
   }
 
   static calculateState(prevState) {
     return {
-      onAddCamp: Actions.addCamp,
-      onAddProgram: Actions.addProgram,
-      updatedCampId: CampStore.getState().get('updatedCampId'),
-      programs: ProgramStore.getState().get('programs'),
       isLoading: RequestStore.getState().get('loading'),
+      userProfile: UserStore.getState().get('profile'),
+      onReceiveUserProfile: Actions.receiveUserProfile,
+      onUpdateUserProfile: Actions.updateUser,
     };
   }
 
-  state = {
-    activeTab: 0,
-    statusMessages: [],
-  }
+  constructor (props) {
+    super(props);
 
-  onNewCamp = (params) => {
-    if (window.confirm(_TRANS('all', 'add_camp_confirm'))) {
-      this.state.onAddCamp(params).then((newCamp) => {
-        this.setState({
-          activeTab: 0,
-        });
-      });
+    let index = 3;
+    // for (let i in tabs) {
+    //   index = i;
+    //   break;
+    // }
+
+    this.state = {
+      statusMessages: [],
+      currentTabIndex: index,
     }
   }
 
-  onNewProgram = (params) => {
-    if (window.confirm(_TRANS('all', 'add_program_confirm'))) {
-      this.state.onAddProgram(params).then((newProgram) => {
-        this.setState({
-          activeTab: 1,
-        });
-      });
-    }
-  }
-
-  activateTab = (tabId) => {
+  setTab = (index, e) => {
+    e.preventDefault();
     this.setState({
-      activeTab: tabId
+      currentTabIndex: index,
     });
   }
 
   render() {
+    const _tabs = [];
+    const _currentTabIndex = this.state.currentTabIndex
+    const _currentTab = tabs[_currentTabIndex];
+    for (let i in tabs) {
+      let tab = tabs[i];
+      _tabs.push(
+        <li key={i} className={_currentTabIndex == i ? 'active' : ''}>
+          <a href={tab.uri} onClick={this.setTab.bind(this, i)}>{tab.pagetitle}</a>
+        </li>
+      );
+    }
+
+    let tabContent = null;
+    switch (_currentTabIndex) {
+      case 1:
+      case '1':
+        tabContent = <Lk 
+          userProfile={this.state.userProfile}
+          onReceiveUserProfile={this.state.onReceiveUserProfile}
+          onUpdateUserProfile={this.state.onUpdateUserProfile}
+        />;
+        break;
+
+      case 3:
+      case '3':
+        tabContent = <Reservations />;
+        break;
+
+      case 2:
+      case '2':
+        tabContent = <Camps />;
+        break;
+
+      case 5:
+      case '5':
+        tabContent = <Vacancies />;
+        break;
+
+      default:
+    }
+
     return (
       <div>
         <div className="loader-wrapper">
-          {this.state.isLoading 
+          {this.state.isLoading
             ? (
               <div className="loader loader--loading">
                 <div className="loader__status">
@@ -119,39 +182,24 @@ class App extends Component {
                 </div>
               </div>
             )
-            : null 
+            : null
           }
         </div>
-
-        <ul className="admin__tabs row">
-          <li className={"col-xs-12 col-md-6" + (this.state.activeTab === 0 ? ' active' : '')}>
-            <a href="javascript:;" className="admin__tabs__item" onClick={this.activateTab.bind(this, 0)}>{_TRANS('all', 'list_camp')}</a>
-            <a href="javascript:;" className="btn btn-icon btn-icon--add" data-action="add-camp"
-              onClick={this.onNewCamp}
-            >
-              <span>{_TRANS('all', 'add_camp')}</span>
+        
+        <ul className="breadcrumb">
+          <li>
+            <a href="/">
+              <i className="fa fa-home"></i>
             </a>
           </li>
-          <li className={"col-xs-12 col-md-6" + (this.state.activeTab === 1 ? ' active' : '')}>
-            <a href="javascript:;" className="admin__tabs__item" onClick={this.activateTab.bind(this, 1)}>{_TRANS('all', 'list_program')}</a>
-            <a href="javascript:;" className="btn btn-icon btn-icon--add" data-action="add-program"
-              onClick={this.onNewProgram}
-            >
-              <span>{_TRANS('all', 'add_program')}</span>
-            </a>
-          </li>
+          <li className="active">{_currentTab.pagetitle}</li>
         </ul>
 
-        <div style={{
-          display: (this.state.activeTab === 0 ? 'block' : 'none')
-        }}>
-          <CampsList onNewProgram={this.onNewProgram} />
-        </div>
-        <div style={{
-          display: (this.state.activeTab === 1 ? 'block' : 'none')
-        }}>
-          <ProgramsList />
-        </div>
+        <ul className="nav nav-tabs">
+          {_tabs}
+        </ul>
+        
+        {tabContent}
       </div>
     );
   }

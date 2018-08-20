@@ -7,6 +7,8 @@ import Actions from '../../../data/Actions';
 
 import ProgramEdit from '../ProgramEdit';
 
+import _TRANS from "../../../const/trans";
+
 class ProgramItem extends Component {
   static defaultProps = {
     isUpdate: false
@@ -23,7 +25,24 @@ class ProgramItem extends Component {
             obj={obj}
             setUpdatedProgram={this.props.setUpdatedProgram}
           />
-        : <h3 onClick={this.onUpdate}>{obj.name}</h3>
+        : (
+          <div className="admin__camp">
+            <div className="admin__camp__descr">
+              <div className="admin__camp__title">
+                <span>{obj.name}</span> &nbsp; &nbsp; 
+                <button className="btn btn-link" type="button" onClick={this.onUpdate}>
+                  {_TRANS('all', 'edit')}
+                </button>
+              </div>
+              <h5>{_TRANS('program', 'introtext')}</h5>
+              {obj.introtext && (
+                <p>
+                  {obj.introtext}
+                </p>
+              )}
+            </div>
+          </div>
+        )
   }
 }
 
@@ -57,7 +76,9 @@ class ProgramsList extends Component {
   }
 
   componentDidMount = () => {
-    this.state.onReceiveProgramsList();
+    if (!this.state.programs || !this.state.programs.length) {
+      this.state.onReceiveProgramsList();
+    }
   }
 
   render() {

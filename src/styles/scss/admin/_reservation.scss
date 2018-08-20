@@ -1,0 +1,110 @@
+.reservation {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 30px 15px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #CCC;
+  line-height: 1.35;
+  // display: flex;
+  // justify-content: space-between;
+  // flex-wrap: wrap;
+
+  &--new {
+    position: relative;
+    background: #fff36f;
+    border-color: darken(#fff36f, 15%);
+
+    &:before {
+      content: 'New';
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: $color-green;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  &__title {
+    font-size: 17px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  &__block {
+    margin-bottom: 30px;
+  }
+
+  &__external {
+    font-size: 30px;
+    color: $color-green;
+    font-weight: 600;
+    min-width: 100px;
+  }
+
+  &__name {
+    font-weight: 600;
+    min-width: 250px;
+    margin-bottom: 15px;
+  }
+
+  &__price {
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-family: $font-secondary;
+
+    span {
+      font-size: 150%;
+    }
+  }
+
+  &__status {
+    height: 60px;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFF;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  &__regards {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #CCC;
+  }
+
+  &__list {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 30px;
+
+    > li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px dashed $color-green;
+
+      > span {
+        margin-bottom: -6px;
+        background: #f7f7f7;
+
+        &:first-child {
+          padding-right: 5px;
+        }
+
+        &:last-child {
+          padding-left: 5px;
+          width: 50%;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

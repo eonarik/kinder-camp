@@ -1,0 +1,48 @@
+.vacancy {
+  border-radius: 10px;
+  background: #f7f7f7;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #CCC;
+  color: #7d7d7d;
+
+  &--active {
+    border-color: $color-green;
+    background: rgba($color-green, .2);
+  }
+
+  h4,.h4 {
+    margin-top: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+    font-family: $font-secondary;
+  }
+
+  h5,.h5 {
+    margin-top: 0;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 9px;
+    font-family: $font-secondary;
+  }
+
+  &__text {
+    margin-bottom: 12px;
+  }
+
+  &__price {
+    font-family: $font-secondary;
+    font-size: 17px;
+
+    &__number {
+      font-size: 41px;
+      color: #e9594f;
+      line-height: 0.9;
+    }
+
+    &__descr {
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -13,13 +13,29 @@ class CampItem extends Component {
     isUpdate: false,
   }
 
+  constructor (props) {
+    super(props);
+  }
+
   onUpdate = () => {
     this.props.setUpdatedCamp(this.props.obj.id);
   }
 
+  onCampCopy = () => {
+    this.props.onNewCamp(this.props.obj);
+  }
+
+  setStatus = (status_id) => {
+    if (status_id != 3 && status_id != 5) {
+      this.props.setUpdatedCamp(null);
+    }
+    this.props.onUpdateCamp(this.props.obj.id, {
+      status_id
+    });
+  }
+
   render() {
     let obj = this.props.obj;
-    console.log(obj)
     let bgimage = "url('" + (typeof obj.image !== 'undefined' && obj.image.src ? obj.image.src : '') + "')"
     return this.props.isUpdate
           ? <CampEdit
@@ -27,6 +43,7 @@ class CampItem extends Component {
               onUpdateCamp={this.props.onUpdateCamp}
               setUpdatedCamp={this.props.setUpdatedCamp}
               onNewProgram={this.props.onNewProgram}
+              setStatus={this.setStatus}
             />
           : (
             <div className="admin__camp">
@@ -43,13 +60,18 @@ class CampItem extends Component {
                     <div>{_TRANS('camp', 'id_ucase')} <span>{obj.external_id}</span> </div>
                     <div>{_TRANS('camp', 'address')} <span>{obj.address}</span> </div>
                   </div>
-                  <div className="admin__camp__actions">
-                    <button className="btn btn-link" type="button" onClick={this.onUpdate}>{_TRANS('all', 'edit')}</button>
-                    <button className="btn btn-link" type="button">{_TRANS('all', 'copy')}</button>
-                  </div>
+                  {(obj.status_id == 3 || obj.status_id == 5) 
+                    ? (
+                      <div className="admin__camp__actions">
+                        <button className="btn btn-link" type="button" onClick={this.onUpdate}>{_TRANS('all', 'edit')}</button>
+                        <button className="btn btn-link" type="button" onClick={this.onCampCopy}>{_TRANS('all', 'copy')}</button>
+                      </div>
+                    )
+                    : null
+                  }
                 </div>
                 <div className="admin__camp__status">
-                  {obj.status_id && (
+                  {typeof obj.status_id !== 'undefined' && (
                     <div className="admin__intro-status">
                       <div className="admin__intro-status-badge" style={{
                         backgroundColor: obj.status_color
@@ -59,9 +81,20 @@ class CampItem extends Component {
                 </div>
               </div>
               <div className="admin__camp__footer">
-                <button type="button" className="btn btn-info">{_TRANS('all', 'moderate')}</button>
-                <button type="button" className="btn btn-default">{_TRANS('all', 'archive')}</button>
-                <button type="button" className="btn btn-warning">{_TRANS('all', 'hide')}</button>
+                {obj.status_id != 2 && obj.status_id != 1
+                  ? (
+                    <button type="button" className="btn btn-info" onClick={this.setStatus.bind(this, 2)}>{_TRANS('all', 'moderate')}</button>
+                  )
+                  : null
+                }
+                {obj.status_id == 4 
+                  ? <button type="button" className="btn btn-default" onClick={this.setStatus.bind(this, 5)}>{_TRANS('all', 'unarchive')}</button>
+                  : <button type="button" className="btn btn-default" onClick={this.setStatus.bind(this, 4)}>{_TRANS('all', 'archive')}</button>
+                }
+                {obj.status_id != 5
+                  ? <button type="button" className="btn btn-warning" onClick={this.setStatus.bind(this, 5)}>{_TRANS('all', 'hide')}</button>
+                  : null
+                }
               </div>
             </div>
           )
@@ -78,10 +111,10 @@ class CampsList extends Component {
     return {
       onReceiveCampsList: Actions.receiveCampsList,
       camps: CampStore.getState().get('camps'),
-      // onUpdateCamp: Actions.updateCamp,
+      updatedCampId: CampStore.getState().get('updatedCampId'),
       updatedCampProps: CampStore.getState().get('updatedCampProps'),
       makeUpdatedCamp: Actions.makeUpdatedCamp,
-      updatedCampId: CampStore.getState().get('updatedCampId'),
+      onUpdateCamp: Actions.updateCamp,
     };
   }
 
@@ -91,16 +124,10 @@ class CampsList extends Component {
 
   constructor(props) {
     super(props);
-    // this.state = {
-    //   _updatedCampId: null,
-    // }
   }
 
   setUpdatedCamp = (id) => {
     this.state.makeUpdatedCamp(id);
-    // this.setState({
-    //   _updatedCampId: id
-    // });
   }
 
   componentDidMount = () => {
@@ -109,25 +136,19 @@ class CampsList extends Component {
     }
   }
 
-  // componentWillReceiveProps = (nextProps) => {
-  //   this.setState({
-  //     _updatedCampId: nextProps.updatedCampId
-  //   });
-  // }
-
   render() {
     const list = this.state.camps;
     let updatedCampProps = this.state.updatedCampProps;
     let updatedCampId = this.state.updatedCampId;
     let camps = [];
     for (let i in list) {
-      let camp = list[i];
+      let camp = {...list[i]};
       let isUpdate = false;
       if (updatedCampId && updatedCampId == camp.id) {
         isUpdate = true;
       }
       if (updatedCampProps && updatedCampProps.id == camp.id) {
-        camp = Object.assign(camp, updatedCampProps);
+        Object.assign(camp, updatedCampProps);
       }
       camps.push(
         <CampItem
@@ -136,6 +157,8 @@ class CampsList extends Component {
           isUpdate={isUpdate}
           setUpdatedCamp={this.setUpdatedCamp}
           onNewProgram={this.props.onNewProgram}
+          onNewCamp={this.props.onNewCamp}
+          onUpdateCamp={this.state.onUpdateCamp}
         />
       );
     }

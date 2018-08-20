@@ -1,10 +1,9 @@
 .footer {
     background-image: url($image-wave), linear-gradient(to top, #cbebf4, rgba(0,0,0,0) 40%);
     background-repeat: repeat-x, no-repeat;
-    background-position: left 250px, center top;
-    padding-top: 300px;
+    background-position: left 30px, center top;
+    padding-top: 80px;
     padding-bottom: 30px;
-    margin-top: -220px;
     
     > .container {
         position: relative;

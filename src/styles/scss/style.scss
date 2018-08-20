@@ -5,11 +5,17 @@
 
 @import 'variables';
 
+@import 'ui/btn';
+@import 'ui/loader';
+@import 'ui/table';
+
 @import 'global/global';
 @import 'global/owl-carousel';
+
 @import 'header/top-line';
 @import 'header/header';
 @import 'header/main-slider';
+
 @import 'content/content';
 @import 'content/filter';
 @import 'content/sales';
@@ -20,13 +26,16 @@
 @import 'content/about';
 @import 'content/sidebar';
 @import 'content/special-offers';
+
 @import 'footer/footer';
+
 @import 'camp/camps';
 @import 'camp/camps-filter';
 @import 'camp/camp';
+
 @import 'admin/settings';
 @import 'admin/admin';
-@import 'admin/admin__camp';
+@import 'admin/admin_camp';
 @import 'admin/program-edit';
-@import 'ui/btn';
-@import 'ui/loader';
+@import 'admin/vacancy';
+@import 'admin/reservation';

@@ -97,11 +97,10 @@ class ModalTariffEdit extends Component {
       <Modal 
         show={this.props.isOpen} 
         onHide={this.props.hideModal}
-        bsSize="sm"
       >
         <Modal.Header>
           <button type="button" className="close" onClick={this.props.hideModal.bind(this, null)}>&times;</button>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="form-group">
@@ -117,6 +116,13 @@ class ModalTariffEdit extends Component {
               )
               : null
             }
+          </div>
+          <div className="form-group">
+            <label>{_TRANS('tariff', 'longtitle_hint')}</label>
+            <input className="form-control" name="longtitle" type="text"
+              defaultValue={tariff.longtitle} 
+              ref={(input) => { this.inputs.longtitle = input; }}
+            />
           </div>
           <div className="form-group row row-sm">
             <div className="col-xs-6">
@@ -138,7 +144,7 @@ class ModalTariffEdit extends Component {
             <label>{_TRANS('all', 'please_select_program')}</label>
             {typeof programOption !== 'undefined' && programOption.length
               ? (
-                <select className="form-control input-sm" name="program_id" 
+                <select className="form-control" name="program_id" 
                   defaultValue={tariff.program_id}
                   ref={(input) => { this.inputs.program_id = input; }}
                 >
@@ -150,14 +156,14 @@ class ModalTariffEdit extends Component {
           </div>
           <div className="form-group">
             <label>{_TRANS('tariff', 'age_hint')}</label>
-            <input className="form-control input-sm" name="age" type="text" 
+            <input className="form-control" name="age" type="text" 
               defaultValue={tariff.age} 
               ref={(input) => { this.inputs.age = input; }} 
             />
           </div>
           <div className="form-group">
             <label>{_TRANS('tariff', 'price_hint')}</label>
-            <input className="form-control input-sm" name="price" type="number" 
+            <input className="form-control" name="price" type="number" 
               defaultValue={tariff.price} 
               ref={(input) => { this.inputs.price = input; }} 
             />
@@ -195,11 +201,6 @@ class CampTariff extends Component {
 
   render() {
     const tariff = this.props.obj;
-
-    if (tariff.period_start && tariff.period_end) {
-      tariff.days = tariff.period_end - tariff.period_start;
-    }
-
     return (
       <div className="col-xs-12 col-sm-6 col-md-4">
         <div className="admin__tariff">
@@ -211,15 +212,15 @@ class CampTariff extends Component {
               {tariff.period_start && tariff.period_end
                 ? (
                   <div>
-                    {tariff.period_start}-{tariff.period_end} {declOfNum(tariff.period_end, _TRANS('all', 'days'))}
+                    {tariff.period}
                   </div>
                 )
                 : null
               }
             </div>
             <div className="admin__tariff-days">
-              <div>{tariff.days}</div>
-              <small>{declOfNum(tariff.days, _TRANS('all', 'days'))}</small>
+              <div>{parseInt(tariff.period_diff)}</div>
+              <small>{declOfNum(parseInt(tariff.period_diff), _TRANS('all', 'days'))}</small>
             </div>
           </div>
           <div className="admin__tariff-body">

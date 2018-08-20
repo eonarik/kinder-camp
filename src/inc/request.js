@@ -1,13 +1,13 @@
 import Actions from '../data/Actions';
+import { notyConfig } from '../config';
 
+// заменить на получение токена с сервера!
+const userToken = '131a6f18175209af3e2f16a3150f960d';
+
+const _TRANS = require('../const/trans');
 
 const Noty = require('noty');
-Noty.overrideDefaults({
-  layout: 'topRight',
-  timeout: 3000,
-  theme: 'kinder-camp',
-  progressBar: false,
-});
+Noty.overrideDefaults(notyConfig);
 
 const request = function (action, params, callback, error) {
   var formData;
@@ -19,6 +19,7 @@ const request = function (action, params, callback, error) {
       formData.append(key, params[key]);
     }
   }
+  formData.append('userToken', userToken);
 
   var url = action;
 
@@ -41,19 +42,26 @@ const request = function (action, params, callback, error) {
             type: 'success',
           }).show();
         }
-        if (typeof callback === 'function') {
-          callback.call(this, data);
-        }
       } else {
         if (data.message) {
           new Noty({
             text: data.message,
             type: 'error',
           }).show();
+        } else if (data.data.length) {
+          for (let i in data.data) {
+            new Noty({
+              text: _TRANS('all', data.data[i].id) + '<br />' + data.data[i].msg,
+              type: 'error',
+            }).show();
+          }
         }
         if (typeof error === 'function') {
           error.call(this, data);
         }
+      }
+      if (typeof callback === 'function') {
+        callback.call(this, data);
       }
     })
     .catch(function (error) {

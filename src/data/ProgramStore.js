@@ -1,6 +1,9 @@
 import Immutable from "immutable";
 import { ReduceStore } from "flux/utils";
-import ActionTypes from "./ActionTypes.js";
+import {
+  UPDATE_PROGRAM,
+  RECEIVE_PROGRAMS_LIST
+} from "./ActionTypes.js";
 import _Dispatcher from "./_Dispatcher.js";
 
 class ProgramStore extends ReduceStore {
@@ -17,10 +20,10 @@ class ProgramStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case ActionTypes.UPDATE_PROGRAM:
+      case UPDATE_PROGRAM:
         return state.set('updatedProgramProps', action.updatedProgramProps);
 
-      case ActionTypes.RECEIVE_PROGRAMS_LIST:
+      case RECEIVE_PROGRAMS_LIST:
         return state.set('programs', action.programs);
 
       default:

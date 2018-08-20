@@ -4,7 +4,7 @@ import { Container } from "flux/utils";
 import CampStore from "../../../data/CampStore.js";
 import Actions from '../../../data/Actions';
 
-const _TRANS = require('../../../const/trans');
+import _TRANS from "../../../const/trans";
 
 class CampEditIntro extends Component {
   static getStores() { 
@@ -27,7 +27,7 @@ class CampEditIntro extends Component {
 
     this.state = {
       _isChangeName: false,
-      _obj: props.obj,
+      // _obj: props.obj,
       _images: [],
     }
   }
@@ -39,7 +39,7 @@ class CampEditIntro extends Component {
   }
 
   onUpdateName = () => {
-    this.state.onUpdateCamp(this.state._obj.id, {
+    this.state.onUpdateCamp(this.props.obj.id, {
       name: this.inputs.name.value
     }).then((updatedCamp) => {
       this.setState({
@@ -52,7 +52,7 @@ class CampEditIntro extends Component {
     this.inputs.image.click();
     this.inputs.image.onchange = (e) => {
       this.state.onAddFile({
-        camp_id: this.state._obj.id,
+        camp_id: this.props.obj.id,
         file: e.target.files[0],
         type,
       }).then((addedImage) => {
@@ -97,15 +97,15 @@ class CampEditIntro extends Component {
   }
 
   render() {
-    const obj = this.state._obj;
-    const _images = this.state._images;
+    let obj = this.props.obj;
+    let _images = this.state._images;
 
     if (Array.isArray(_images) && _images.length > 1) {
       var _ext_images = [];
       for (let i = 1; i < _images.length; i++) {
         _ext_images.push(
           <div key={i} className="admin__intro-thumb" style={{
-            backgroundImage: "url("+ _images[i].src +")"
+            backgroundImage: "url('"+ _images[i].src +"')"
           }} onClick={this.onDeleteImage.bind(this, _images[i].id)}></div>
         );
       }
@@ -117,7 +117,7 @@ class CampEditIntro extends Component {
           <div className="admin__intro-image">
             {_images && _images.length
               ? (<div className="admin__intro-image-img" style={{
-                    backgroundImage: "url("+ _images[0].src +")"
+                    backgroundImage: "url('"+ _images[0].src +"')"
                   }}
                   data-toggle="tooltip"
                   onClick={this.onDeleteImage.bind(this, _images[0].id)}
@@ -162,7 +162,7 @@ class CampEditIntro extends Component {
             {obj.address && (
               <div className="admin__intro-point">
                 <i className="text-info fa fa-map-marker"></i>
-                <span>{obj.address}</span>
+                <span>&nbsp;&nbsp;{obj.address}</span>
               </div>
             )}
           </div>

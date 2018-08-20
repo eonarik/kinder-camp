@@ -4,7 +4,7 @@ import { Container } from "flux/utils";
 import CampStore from "../../../data/CampStore.js";
 import Actions from '../../../data/Actions';
 
-const _TRANS = require('../../../const/trans');
+import _TRANS from "../../../const/trans";
 
 class CampTariff extends Component {
   static getStores() {

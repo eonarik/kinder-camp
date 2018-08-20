@@ -4,7 +4,7 @@ import { Container } from "flux/utils";
 import ProgramStore from "../../../data/ProgramStore.js";
 import Actions from '../../../data/Actions';
 
-const _TRANS = require('../../../const/trans');
+import _TRANS from "../../../const/trans";
 
 class CampEditProgram extends Component {
   static getStores() {

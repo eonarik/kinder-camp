@@ -4,7 +4,8 @@ import { Container } from "flux/utils";
 import ProgramStore from "../../../data/ProgramStore.js";
 import Actions from '../../../data/Actions';
 
-const _TRANS = require('../../../const/trans');
+import _TRANS from "../../../const/trans";
+import { timeoutChangeInput } from "../../../config";
 
 class ProgramEdit extends Component {
 
@@ -19,6 +20,7 @@ class ProgramEdit extends Component {
   }
 
   inputs = {}
+  changeInputCounter = 0;
 
   constructor(props) {
     super(props);
@@ -26,6 +28,22 @@ class ProgramEdit extends Component {
       _isChangeName: false,
       _obj: props.obj
     }
+  }
+
+  onChangeInput = () => {
+    this.changeInputCounter++;
+
+    setTimeout(() => {
+      this.changeInputCounter--;
+      if (this.changeInputCounter === 0) {
+        // update
+        let values = [];
+        for (let key in this.inputs) {
+          values[key] = this.inputs[key].value;
+        }
+        this.state.onUpdateProgram(this.state._obj.id, values);
+      }
+    }, timeoutChangeInput);
   }
 
   toggleChangeName = (flag) => {
@@ -101,30 +119,39 @@ class ProgramEdit extends Component {
         }
         <div className="form-group">
           <h5>{_TRANS('program', 'introtext')}</h5>
-          <textarea className="form-control" name="introtext" id="program-introtext" rows="9" defaultValue={obj.introtext}
-            ref={(input) => { this.inputs.introtext = input; }} />
+          <textarea className="form-control" name="introtext" id="program-introtext" rows="9" 
+            defaultValue={obj.introtext}
+            ref={(input) => { this.inputs.introtext = input; }} 
+            onChange={this.onChangeInput}
+          />
         </div>
 
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <div className="form-group">
               <h5>{_TRANS('program', 'shedule_shifts')}</h5>
-              <textarea className="form-control" name="shedule_shifts" id="program-shedule_shifts" rows="9" defaultValue={obj.shedule_shifts}
-                ref={(input) => { this.inputs.shedule_shifts = input; }} />
+              <textarea className="form-control" name="shedule_shifts" id="program-shedule_shifts" rows="9" 
+                defaultValue={obj.shedule_shifts}
+                ref={(input) => { this.inputs.shedule_shifts = input; }} 
+                onChange={this.onChangeInput}
+              />
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="form-group">
               <h5>{_TRANS('program', 'day_mode')}</h5>
-              <textarea className="form-control" name="day_mode" id="program-day_mode" rows="9" defaultValue={obj.day_mode}
-                ref={(input) => { this.inputs.day_mode = input; }} />
+              <textarea className="form-control" name="day_mode" id="program-day_mode" rows="9" 
+                defaultValue={obj.day_mode}
+                ref={(input) => { this.inputs.day_mode = input; }}
+                onChange={this.onChangeInput}
+              />
             </div>
           </div>
         </div>
 
-        <div className="form-group">
+        {/*<div className="form-group">
           <a className="btn btn-danger btn-lg" href="javascript:;" onClick={this.saveProgram}>Сохранить</a>
-        </div>
+        </div>*/}
       </div>
     );
   }
