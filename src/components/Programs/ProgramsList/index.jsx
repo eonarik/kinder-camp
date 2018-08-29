@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Container } from "flux/utils";
 import ProgramStore from "../../../data/ProgramStore.js";
 import CampStore from "../../../data/CampStore.js";
-import Actions from '../../../data/Actions';
+import Actions from '../../../data/Actions/programs';
 
 import ProgramEdit from '../ProgramEdit';
 

@@ -1,5 +1,8 @@
 import { host, apiPrefix } from '../config';
 
+export const RESOURCES = {
+  LK_MENU: host + apiPrefix + 'resources/lk_menu',
+};
 export const CAMPS = {
   CREATE: host + apiPrefix + 'camps/create',
   UPDATE: host + apiPrefix + 'camps/update',
@@ -49,4 +52,15 @@ export const RESERVATIONS = {
   CREATE: host + apiPrefix + 'reservations/create',
   UPDATE: host + apiPrefix + 'reservations/update',
   LIST: host + apiPrefix + 'reservations/list',
+};
+export const REVIEWS = {
+  CREATE: host + apiPrefix + 'reviews/create',
+  UPDATE: host + apiPrefix + 'reviews/update',
+  LIST: host + apiPrefix + 'reviews/list',
+};
+export const MESSAGES = {
+  CREATE: host + apiPrefix + 'messages/create',
+  UPDATE: host + apiPrefix + 'messages/update',
+  LIST: host + apiPrefix + 'messages/list',
+  DIALOG_LIST: host + apiPrefix + 'messages/dialoglist',
 };

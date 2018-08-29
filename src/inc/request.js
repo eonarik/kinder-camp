@@ -11,6 +11,16 @@ Noty.overrideDefaults(notyConfig);
 
 const request = function (action, params, callback, error) {
   var formData;
+  var is_notify = true;
+  if (typeof params.not_notify !== 'undefined') {
+    is_notify = false;
+    delete params.not_notify;
+  }
+  var is_loader = true;
+  if (typeof params.not_loader !== 'undefined') {
+    is_loader = false;
+    delete params.not_loader;
+  }
   if (params instanceof FormData) {
     formData = params;
   } else {
@@ -23,7 +33,9 @@ const request = function (action, params, callback, error) {
 
   var url = action;
 
-  Actions.startRequest();
+  if (is_loader) {
+    Actions.startRequest();
+  }
   fetch(url, {
     method: 'post',
     // credentials: 'same-origin',
@@ -34,9 +46,11 @@ const request = function (action, params, callback, error) {
       return response.json();
     })
     .then(function (data) {
-      Actions.endRequest();
+      if (is_loader) {
+        Actions.endRequest();
+      }
       if (data.success) {
-        if (data.message) {
+        if (data.message && is_notify) {
           new Noty({
             text: data.message,
             type: 'success',
@@ -44,16 +58,20 @@ const request = function (action, params, callback, error) {
         }
       } else {
         if (data.message) {
-          new Noty({
-            text: data.message,
-            type: 'error',
-          }).show();
-        } else if (data.data.length) {
-          for (let i in data.data) {
+          if (is_notify) {
             new Noty({
-              text: _TRANS('all', data.data[i].id) + '<br />' + data.data[i].msg,
+              text: data.message,
               type: 'error',
             }).show();
+          }
+        } else if (data.data.length) {
+          if (is_notify) {
+            for (let i in data.data) {
+              new Noty({
+                text: _TRANS('all', data.data[i].id) + '<br />' + data.data[i].msg,
+                type: 'error',
+              }).show();
+            }
           }
         }
         if (typeof error === 'function') {
@@ -65,12 +83,16 @@ const request = function (action, params, callback, error) {
       }
     })
     .catch(function (error) {
-      Actions.endRequest();
+      if (is_loader) {
+        Actions.endRequest();
+      }
       console.log(error);
-      new Noty({
-        text: 'Ошибка получения данных',
-        type: 'error',
-      }).show();
+      if (is_notify) {
+        new Noty({
+          text: 'Ошибка получения данных',
+          type: 'error',
+        }).show();
+      }
     });
 }
 

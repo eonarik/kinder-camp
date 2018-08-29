@@ -1,0 +1,257 @@
+.messages {
+  position: relative;
+  background: #f7f7f7;
+  border-radius: 10px 0 0 10px;
+  margin-bottom: 15px;
+  border: 1px solid #CCC;
+
+  &--expand {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    height: 100vh;
+  }
+}
+
+.userlist {
+  overflow: auto;
+  height: 100%;
+  border-right: 1px solid #CCC;
+  padding: 15px 0;
+
+  &__nousers {
+    padding: 15px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #CCC;
+
+    &:hover:not(.userlist__item--active) {
+      background: #EFEFEF;
+      cursor: pointer;
+    }
+
+    &:first-child {
+      border-top: 1px solid #CCC;
+    }
+
+    &--active {
+      background: #FFF;
+    }
+
+    &__avatar {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #CCC;
+      text-align: center;
+      font-size: 30px;
+      color: #FFF;
+      margin-right: 15px;
+
+      img {
+        display: block;
+      }
+    }
+
+    &__body {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    &__date {
+      font-size: 12px;
+      color: #a9a9a9;
+    }
+
+    &__title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &__last {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 190px;
+    }
+  }
+}
+
+.msglist-wrapper {
+  position: relative;
+  height: calc(100vh - 60px);
+  min-height: 100%;
+  padding-bottom: 33px;
+
+  &__nomessages {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.msglist {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  overflow: auto;
+
+  hr {
+    width: 100%;
+    margin: 0;
+    border-top-color: #CCC
+  }
+
+  pre {
+    margin: 5px 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__date {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #a9a9a9;
+  }
+
+  &__item {
+    display: flex;
+    padding: 15px 15px 5px;
+    max-width: 60%;
+    background: #FFF;
+    margin: 6px 0;
+
+    &--unread {
+      // background: #EFEFEF;
+    }
+
+    &--your {
+      flex-direction: row-reverse;
+      text-align: right;
+      float: right;
+
+      &:after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+
+      .msglist__item__avatar {
+        margin-right: 0;
+        margin-left: 15px;
+      }
+      .msglist__item__title {
+        flex-direction: row-reverse;
+      }
+      .msglist__item__date {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+      // .msglist__item__text {
+      //   text-align: left;
+      // }
+    }
+
+    &__body {
+      margin-top: -3px;
+    }
+
+    &__avatar {
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #CCC;
+      text-align: center;
+      font-size: 20px;
+      color: #FFF;
+      margin-right: 15px;
+
+      img {
+        display: block;
+      }
+    }
+
+    &__title {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    &__date {
+      color: #a9a9a9;
+      font-size: 12px;
+      font-weight: 400;
+      margin-left: 10px;
+    }
+
+    &__text {
+      margin-bottom: 10px;
+      text-align: left;
+      white-space: pre-line;
+
+      img {
+        margin: 5px 0;
+        display: block;
+      }
+
+      .btn {
+        margin: 5px 0;
+        display: table;
+        padding: 0;
+
+        &:hover {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+.msgsend {
+  display: flex;
+  border-top: 1px solid #CCC;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &__input {
+    border: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    padding: 7px;
+    max-height: 32px;
+  }
+
+  &__actions {
+    .btn {
+      border-radius: 0;
+      box-shadow: none;
+      margin: -1px -1px -1px 0;
+      padding: 7px 18px 7px 15px;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+}

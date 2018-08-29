@@ -1,6 +1,6 @@
 import Immutable from "immutable";
 import { ReduceStore } from "flux/utils";
-import { REQUEST } from "./ActionTypes.js";
+import { REQUEST, RECEIVE_MENU } from "./ActionTypes.js";
 import _Dispatcher from "./_Dispatcher.js";
 
 class RequestStore extends ReduceStore {
@@ -18,6 +18,9 @@ class RequestStore extends ReduceStore {
     switch (action.type) {
       case REQUEST:
         return state.set('loading', action.loading);
+
+      case RECEIVE_MENU:
+        return state.set('menu', action.menu);
 
       default:
         return state;

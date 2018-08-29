@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Container } from "flux/utils";
 import CampStore from "../../../data/CampStore.js";
-import Actions from '../../../data/Actions';
+import Actions from '../../../data/Actions/camps';
 
 import CampEdit from '../CampEdit';
 

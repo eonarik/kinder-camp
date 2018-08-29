@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { Container } from "flux/utils";
 import CampStore from "../../../data/CampStore.js";
 import ProgramStore from "../../../data/ProgramStore.js";
-import Actions from '../../../data/Actions';
+import ActionsPrograms from '../../../data/Actions/programs';
+import ActionsTariffs from '../../../data/Actions/tariffs';
 
 import { Modal } from 'react-bootstrap';
 
@@ -252,14 +253,11 @@ class CampEditTariffs extends Component {
 
   static calculateState(prevState) {
     return {
-      onReceiveTariffsList: Actions.receiveTariffsList,
-      onReceiveProgramsList: Actions.receiveProgramsList,
-      onAddTariff: Actions.addTariff,
-      onUpdateTariff: Actions.updateTariff,
-      onDeleteTariff: Actions.deleteTariff,
-      // programs: ProgramStore.getState().get('programs'),
-      // tariffs: TariffStore.getState().get('tariffs'),
-      // updatedTariff: TariffStore.getState().get('updatedTariff')
+      onReceiveTariffsList: ActionsTariffs.receiveTariffsList,
+      onReceiveProgramsList: ActionsPrograms.receiveProgramsList,
+      onAddTariff: ActionsTariffs.addTariff,
+      onUpdateTariff: ActionsTariffs.updateTariff,
+      onDeleteTariff: ActionsTariffs.deleteTariff,
     };
   }
 

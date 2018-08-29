@@ -56,7 +56,7 @@
     }
     
     &-icon {
-        font-size: 13px;
+        font-size: 14px;
         padding: 0;
         border: none;
         line-height: 20px;
@@ -64,9 +64,18 @@
         color: $color-dark-blue;
         font-family: $font-secondary;
         box-shadow: none;
+        display: flex;
+        align-items: center;
         
         > span {
             border-bottom: 1px solid;
+        }
+
+        > .fa {
+            font-size: 150%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
         }
         
         &:before {
@@ -74,26 +83,31 @@
             display: inline-block;
             vertical-align: middle;
             background-repeat: no-repeat;
-            margin-right: 8px;
             box-shadow: $shadow-2dp;
             transition: .3s;
         }
         
+        &:hover,
+        &:active,
+        &:focus {
+            box-shadow: none;
+        }
+        
         &--add {
             margin-bottom: 20px;
-        
+
             &:before {
                 background-image: url($image-icon-plus-blue);
                 height: 21px;
                 width: 21px;
                 border-radius: 50%;
+                margin-right: 8px;
+            
             }
         
             &:hover,
             &:active,
             &:focus {
-                box-shadow: none;
-                
                 &:before {
                     box-shadow: $shadow-4dp;
                 }
@@ -106,13 +120,12 @@
                 height: 21px;
                 width: 21px;
                 border-radius: 50%;
+                margin-right: 8px;
             }
         
             &:hover,
             &:active,
             &:focus {
-                box-shadow: none;
-                
                 &:before {
                     box-shadow: $shadow-4dp;
                 }
@@ -125,13 +138,12 @@
                 height: 21px;
                 width: 21px;
                 border-radius: 50%;
+                margin-right: 8px;
             }
         
             &:hover,
             &:active,
             &:focus {
-                box-shadow: none;
-                
                 &:before {
                     box-shadow: $shadow-4dp;
                 }

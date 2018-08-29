@@ -45,20 +45,50 @@ h,.h {
     height: 100%;
 }
 .mb-0 {
-    margin-bottom: 0;
+    margin-bottom: 0; 
 }
-.text-success {
-    color: $color-green !important;
+.text {
+    &-underline {
+        border-bottom: 1px solid;
+        text-decoration: none;
 
-    &:hover {
-        color: darken($color-green, 15%) !important;
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: none;
+        }
     }
-}
-.text-danger {
-    color: $color-red !important;
 
-    &:hover {
-        color: darken($color-red, 15%) !important;
+    &-success {
+        color: $color-green !important;
+    
+        &:hover {
+            color: darken($color-green, 15%) !important;
+        }
+    }
+
+    &-warning {
+        color: $color-orange !important;
+    
+        &:hover {
+            color: darken($color-orange, 15%) !important;
+        }
+    }
+
+    &-danger {
+        color: $color-red !important;
+    
+        &:hover {
+            color: darken($color-red, 15%) !important;
+        }
+    }
+
+    &-info {
+        color: $color-blue !important;
+    
+        &:hover {
+            color: darken($color-blue, 15%) !important;
+        }
     }
 }
 
@@ -74,6 +104,16 @@ h,.h {
         > [class*=col-] {
             padding-left: 10px;
             padding-right: 10px;
+        }
+    }
+
+    &--nospacing {
+        margin-left: 0;
+        margin-right: 0;
+
+        > [class*=col-] {
+            padding-left: 0;
+            padding-right: 0;
         }
     }
 }
@@ -119,31 +159,6 @@ h,.h {
         flex-direction: column;
     }
 } 
-
-.text{
-    &-underline {
-        border-bottom: 1px solid;
-        text-decoration: none;
-
-        &:hover,
-        &:active,
-        &:focus {
-            text-decoration: none;
-        }
-    }
-
-    &-warning {
-        color: $color-yellow;
-    }
-
-    &-success {
-        color: $color-green;
-    }
-
-    &-info {
-        color: $color-blue;
-    }
-}
 
 .next-link {
     &:after {

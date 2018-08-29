@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Container } from "flux/utils";
 import ProgramStore from "../../../data/ProgramStore.js";
-import Actions from '../../../data/Actions';
+import Actions from '../../../data/Actions/programs';
 
 import _TRANS from "../../../const/trans";
 import { timeoutChangeInput } from "../../../config";

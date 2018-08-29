@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import { Container } from "flux/utils";
 import CampStore from "../../../data/CampStore.js";
-import Actions from '../../../data/Actions';
+import ActionsCamps from '../../../data/Actions/camps';
+import ActionsFiles from '../../../data/Actions/files';
 
 import _TRANS from "../../../const/trans";
 
@@ -13,10 +14,10 @@ class CampEditIntro extends Component {
 
   static calculateState(prevState) {
     return {
-        onAddFile: Actions.addFile,
-        onDeleteFile: Actions.deleteFile,
-        onReceiveFilesList: Actions.receiveFilesList,
-        onUpdateCamp: Actions.updateCamp,
+        onAddFile: ActionsFiles.addFile,
+        onDeleteFile: ActionsFiles.deleteFile,
+        onReceiveFilesList: ActionsFiles.receiveFilesList,
+        onUpdateCamp: ActionsCamps.updateCamp,
     }; 
   }
 

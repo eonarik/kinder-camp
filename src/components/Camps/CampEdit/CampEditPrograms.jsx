@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import { Container } from "flux/utils";
 import ProgramStore from "../../../data/ProgramStore.js";
-import Actions from '../../../data/Actions';
+import ActionsPrograms from '../../../data/Actions/programs';
+import ActionsCampPrograms from '../../../data/Actions/camp_programs';
 
 import _TRANS from "../../../const/trans";
 
@@ -13,10 +14,10 @@ class CampEditProgram extends Component {
 
   static calculateState(prevState) {
     return {
-      onReceiveProgramsList: Actions.receiveProgramsList,
+      onReceiveProgramsList: ActionsPrograms.receiveProgramsList,
       programs: ProgramStore.getState().get('programs'),
-      onDeleteProgramToCamp: Actions.deleteProgramToCamp,
-      onAddProgramToCamp: Actions.addProgramToCamp,
+      onDeleteProgramToCamp: ActionsCampPrograms.deleteProgramToCamp,
+      onAddProgramToCamp: ActionsCampPrograms.addProgramToCamp,
     };
   }
 

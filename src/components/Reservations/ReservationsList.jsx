@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { Container } from "flux/utils";
 import ReservationStore from "../../data/ReservationStore";
 import CampStore from "../../data/CampStore";
-import Actions from '../../data/Actions';
+import Actions from '../../data/Actions/reservations';
+import ActionsCamps from '../../data/Actions/camps';
 
 class ReservationsListItem extends Component {
   constructor (props) {
@@ -114,7 +115,7 @@ class ReservationsList extends Component {
       onUpdateReservation: Actions.updateReservation,
       onReceiveReservationsList: Actions.receiveReservationsList,
       reservations: ReservationStore.getState().get('reservations'),
-      onReceiveStatusesList: Actions.receiveStatusesList,
+      onReceiveStatusesList: ActionsCamps.receiveStatusesList,
       statuses: CampStore.getState().get('statuses'),
     };
   }

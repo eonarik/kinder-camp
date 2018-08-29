@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Container } from "flux/utils";
 import TariffStore from "../../data/TariffStore.js";
-import Actions from '../../data/Actions';
+import Actions from '../../data/Actions/tariffs';
 
 const _TRANS = require('../../const/trans');
 

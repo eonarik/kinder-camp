@@ -93,11 +93,11 @@ class Lk extends Component {
     });
   }
 
-  componentDidMount = () => {
-    if (!this.props.userProfile || !Object.keys(this.props.userProfile).length) {
-      this.props.onReceiveUserProfile();
-    }
-  }
+  // componentDidMount = () => {
+  //   if (!this.props.userProfile || !Object.keys(this.props.userProfile).length) {
+  //     this.props.onReceiveUserProfile();
+  //   }
+  // }
 
   render() {
     let userProfile = this.props.userProfile || {};

@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { Container } from "flux/utils";
 import CampStore from "../../data/CampStore.js";
 import ProgramStore from "../../data/ProgramStore.js";
-import Actions from '../../data/Actions';
+import ActionsPrograms from '../../data/Actions/programs';
+import ActionsCamps from '../../data/Actions/camps';
 
 import CampsList from './CampsList';
 import ProgramsList from '../Programs/ProgramsList';
@@ -18,8 +19,8 @@ class Camps extends Component {
 
   static calculateState(prevState) {
     return {
-      onAddCamp: Actions.addCamp,
-      onAddProgram: Actions.addProgram,
+      onAddCamp: ActionsCamps.addCamp,
+      onAddProgram: ActionsPrograms.addProgram,
       updatedCampId: CampStore.getState().get('updatedCampId'),
       programs: ProgramStore.getState().get('programs'),
     };
