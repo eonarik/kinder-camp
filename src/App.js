@@ -7,8 +7,10 @@ import RequestStore from "./data/RequestStore";
 import UserStore from "./data/UserStore";
 
 import Lk from './components/Lk';
+import LkParent from './components/LkParent';
 import Camps from './components/Camps';
 import Reservations from './components/Reservations';
+import ReservationsParent from './components/ReservationsParent';
 import Vacancies from './components/Vacancies';
 import Reviews from './components/Reviews';
 import Messages from './components/Messages';
@@ -19,54 +21,56 @@ import _TRANS from "./const/trans";
 
 const tpls = {
   Lk,
+  LkParent,
   Camps,
   Reservations,
+  ReservationsParent,
   Vacancies,
   Reviews,
   Messages,
 };
 
-class Message extends Component {
-  static defaultProps = {
-    type: 'loading',
-    text: '',
-  }
+// class Message extends Component {
+//   static defaultProps = {
+//     type: 'loading',
+//     text: '',
+//   }
 
-  msg = {
-    loading: {
-      cls: 'alert-warning',
-      icon: <i className="fa fa-spinner fa-pulse"></i>,
-      text: _TRANS('all', 'loading') + '...'
-    },
-    danger: {
-      cls: 'alert-danger',
-      icon: <i className="fa fa-times"></i>,
-    },
-    success: {
-      cls: 'alert-success',
-      icon: <i className="fa fa-check"></i>,
-    },
-  };
+//   msg = {
+//     loading: {
+//       cls: 'alert-warning',
+//       icon: <i className="fa fa-spinner fa-pulse"></i>,
+//       text: _TRANS('all', 'loading') + '...'
+//     },
+//     danger: {
+//       cls: 'alert-danger',
+//       icon: <i className="fa fa-times"></i>,
+//     },
+//     success: {
+//       cls: 'alert-success',
+//       icon: <i className="fa fa-check"></i>,
+//     },
+//   };
 
-  render() {
-    let msg = this.msg[this.props.type];
-    if (this.props.text) {
-      msg.text = this.props.text;
-    }
-    return (
-      <div className={"loader alert " + msg.cls}>
-        <div className="loader__status">
-          <div className="loader__status__icon">
-            {msg.icon}
-          </div>
-        </div>
-        <div className="loader__text">
-          {msg.text}
-        </div>
-      </div>
-    );
-  }
-}
+//   render() {
+//     let msg = this.msg[this.props.type];
+//     if (this.props.text) {
+//       msg.text = this.props.text;
+//     }
+//     return (
+//       <div className={"loader alert " + msg.cls}>
+//         <div className="loader__status">
+//           <div className="loader__status__icon">
+//             {msg.icon}
+//           </div>
+//         </div>
+//         <div className="loader__text">
+//           {msg.text}
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
 class App extends Component {
 
@@ -111,7 +115,7 @@ class App extends Component {
       currentTabIndex: index,
     });
 
-    if (addHistory && window.location.pathname != tab.uri) {
+    if (addHistory && window.location.pathname !== tab.uri) {
       window.history.pushState({
         page: tab.uri,
         type: "tab",
@@ -126,7 +130,7 @@ class App extends Component {
       this.state.onReceiveMenu().then((menu) => {
         let index = 0;
         for (let i in menu) {
-          if (menu[i].uri == window.location.pathname) {
+          if (menu[i].uri === window.location.pathname) {
             index = i;
             break;
           }
@@ -155,23 +159,33 @@ class App extends Component {
     for (let i in tabs) {
       let tab = tabs[i];
       _tabs.push(
-        <li key={tab.id} className={_currentTabIndex == i ? 'active' : ''}>
+        <li key={tab.id} className={_currentTabIndex === i ? 'active' : ''}>
           <a href={tab.uri} onClick={this.setTab.bind(this, i, tab, true)}>{tab.pagetitle}</a>
         </li>
       );
 
-      if (_currentTabIndex == i) {
-        if (tab.tpl == 'Lk') {
-          tabContent = <Lk 
-            userProfile={this.state.userProfile}
-            onUpdateUserProfile={this.state.onUpdateUserProfile}
-          />;
-        } else {
-          if (typeof tpls[tab.tpl] !== 'undefined') {
-            let Tpl = tpls[tab.tpl];
-            tabContent = <Tpl />;
-          }
-        } 
+      if (_currentTabIndex === i) {
+        switch (tab.tpl) {
+          case 'LkParent':
+            tabContent = <LkParent 
+              userProfile={this.state.userProfile}
+              onUpdateUserProfile={this.state.onUpdateUserProfile}
+            />;
+            break;
+            
+          case 'Lk':
+            tabContent = <Lk 
+              userProfile={this.state.userProfile}
+              onUpdateUserProfile={this.state.onUpdateUserProfile}
+            />;
+            break;
+          
+          default:
+            if (typeof tpls[tab.tpl] !== 'undefined') {
+              let Tpl = tpls[tab.tpl];
+              tabContent = <Tpl />;
+            }
+        }
       }
     }
 

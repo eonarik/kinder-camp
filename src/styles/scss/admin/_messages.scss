@@ -73,8 +73,20 @@
     }
 
     &__title {
+      position: relative;
       font-size: 14px;
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 190px;
+      padding-right: 24px;
+
+      .badge {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
     }
 
     &__last {
@@ -135,6 +147,7 @@
     max-width: 60%;
     background: #FFF;
     margin: 6px 0;
+    float: left;
 
     &--unread {
       // background: #EFEFEF;

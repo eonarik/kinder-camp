@@ -8,6 +8,10 @@ class FormControl extends Component {
 
   static defaultProps = {
     formGroupType: null,
+    cols: [
+      'col-xs-12 col-md-6',
+      'col-xs-12 col-md-6'
+    ],
     id: null,
     label: null,
     name: '',
@@ -48,14 +52,14 @@ class FormControl extends Component {
     switch (this.props.formGroupType) {
       case 'horizontal':
         cmp = (
-          <div className={"row flex-row flex-row--vcenter form-group" + (this.props.errorMessage ? ' has-error' : '')}>
-            <div className="col-xs-12 col-md-6">
+          <div className={"row row-sm flex-row flex-row--vcenter form-group" + (this.props.errorMessage ? ' has-error' : '')}>
+            <div className={this.props.cols[0] || 'col-auto'}>
               {this.props.label 
                 ? <label htmlFor={this.props.label} className="settings__label">{this.props.label}</label>
                 : null
               }
             </div>
-            <div className="col-xs-12 col-md-6">
+            <div className={this.props.cols[1] || 'col-auto'}>
               {this.props.type == 'textarea'
                 ? <textarea id={this.props.label} rows="5" name={this.props.name} className="form-control"
                   value={this.state.value}

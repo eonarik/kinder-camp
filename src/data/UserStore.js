@@ -5,7 +5,7 @@ import {
   UPDATE_USER_PROFILE
 } from "./ActionTypes.js";
 import _Dispatcher from "./_Dispatcher.js";
-import Actions from './Actions';
+// import Actions from './Actions';
 
 class TariffStore extends ReduceStore {
   constructor() {
@@ -14,7 +14,7 @@ class TariffStore extends ReduceStore {
 
   getInitialState() {
     return Immutable.Map({
-      profile: null,
+      profile: {},
     });
   }
 

@@ -190,9 +190,9 @@ class CampTariff extends Component {
     obj: {},
   }
 
-  constructor (props) {
-    super(props);
-  }
+  // constructor (props) {
+  //   super(props);
+  // }
 
   inputs = {}
 
@@ -220,13 +220,13 @@ class CampTariff extends Component {
               }
             </div>
             <div className="admin__tariff-days">
-              <div>{parseInt(tariff.period_diff)}</div>
-              <small>{declOfNum(parseInt(tariff.period_diff), _TRANS('all', 'days'))}</small>
+              <div>{parseInt(tariff.period_diff, 10)}</div>
+              <small>{declOfNum(parseInt(tariff.period_diff, 10), _TRANS('all', 'days'))}</small>
             </div>
           </div>
           <div className="admin__tariff-body">
             <div className="admin__tariff-program">
-              <a href="javascript: void(0);">{tariff.program_name}</a>
+              <a>{tariff.program_name}</a>
             </div>
             <div className="admin__tariff-age">
               <span>{tariff.age}</span>
@@ -237,8 +237,8 @@ class CampTariff extends Component {
             </div>
           </div>
           <div className="admin__tariff-footer">
-            <a href="javascript: void(0);" className="btn btn-icon btn-icon--edit" data-toggle="tooltip" title={_TRANS('all', 'edit')} data-placement="bottom" onClick={this.onToggleUpdateTariff}></a>
-            <a href="javascript: void(0);" className="btn btn-icon btn-icon--delete" data-toggle="tooltip" title={_TRANS('all', 'delete')} data-placement="bottom" onClick={this.props.onDeleteTariff.bind(this, tariff.id)}></a>
+            <button className="btn btn-icon btn-icon--edit" data-toggle="tooltip" title={_TRANS('all', 'edit')} data-placement="bottom" onClick={this.onToggleUpdateTariff}></button>
+            <button className="btn btn-icon btn-icon--delete" data-toggle="tooltip" title={_TRANS('all', 'delete')} data-placement="bottom" onClick={this.props.onDeleteTariff.bind(this, tariff.id)}></button>
           </div>
         </div>
       </div>
@@ -283,7 +283,7 @@ class CampEditTariffs extends Component {
       if (tariffs && tariffs.length) {
         for (let i in tariffs) {
           let tariff = tariffs[i];
-          if (tariff.id == newObj.id) {
+          if (tariff.id === newObj.id) {
             tariffs[i] = newObj;
             this.setState({
               isOpenModal: false,
@@ -321,7 +321,7 @@ class CampEditTariffs extends Component {
       this.state.onDeleteTariff(id).then(() => {
         let _tariffs = [...this.state._tariffs];
         for (let i in _tariffs) {
-          if (_tariffs[i].id == id) {
+          if (_tariffs[i].id === id) {
             _tariffs.splice(i, 1);
             break;
           }

@@ -16,7 +16,7 @@ class MessagesUsersItem extends Component {
         </div>
         <div className="userlist__item__body">
           <div className="userlist__item__title">
-            {obj.user_fullname} &nbsp;
+            {obj.user_fullname}
             {obj.unread_messages <= 0 || <span className="badge">{obj.unread_messages}</span>}
           </div>
           <div className="userlist__item__last">
@@ -24,7 +24,9 @@ class MessagesUsersItem extends Component {
               __html: obj.last_message
             }} />
           </div>
-          <div className="userlist__item__date">{obj.date_sent_render}</div>
+          <div className="userlist__item__date">
+            {obj.date_sent_render === 'Сегодня' ? obj.date_sent_render + ' в ' + obj.time : obj.date_sent_render}
+          </div>
         </div>
       </div>
     );

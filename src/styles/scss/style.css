@@ -174,7 +174,8 @@
 .btn {
   transition: 0.1s;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: none; }
+  border: none;
+  border-radius: 0; }
   .btn:hover {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2); }
   .btn-rounded {
@@ -217,7 +218,8 @@
     font-family: "Futura Round";
     box-shadow: none;
     display: flex;
-    align-items: center; }
+    align-items: center;
+    background: none; }
     .btn-icon > span {
       border-bottom: 1px solid; }
     .btn-icon > .fa {
@@ -278,6 +280,16 @@
         box-shadow: none; }
         .btn-icon--hide:hover:before, .btn-icon--hide:active:before, .btn-icon--hide:focus:before {
           box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
+  .btn-group {
+    display: flex; }
+    .btn-group--right {
+      justify-content: flex-end; }
+    .btn-group > .btn:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0; }
+    .btn-group > .btn:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0; }
 
 .loader-wrapper {
   position: fixed;
@@ -354,6 +366,31 @@
   border-radius: 0 !important;
   margin: -7px -10px -5px;
   width: calc(100% + 20px); }
+
+.custom-checkbox input[type="checkbox"] {
+  display: none; }
+  .custom-checkbox input[type="checkbox"]:checked ~ label:after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: -3px;
+    width: 8px;
+    height: 16px;
+    border: solid #e95a50;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); }
+  .custom-checkbox input[type="checkbox"] ~ label {
+    position: relative;
+    padding-left: 25px;
+    line-height: 18px; }
+    .custom-checkbox input[type="checkbox"] ~ label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #CCC; }
 
 body {
   font-size: 13px;
@@ -1546,6 +1583,10 @@ p.people-name {
   padding: 15px 15px 1px;
   margin-bottom: 15px; }
 
+.settings hr {
+  border-color: #CCC;
+  box-shadow: 0 1px 0 0 #FFF; }
+
 .settings__subtitle {
   font-size: 17px;
   font-weight: 900;
@@ -2033,7 +2074,8 @@ p.people-name {
   .reservation__price {
     font-weight: 600;
     margin-bottom: 20px;
-    font-family: "Futura Round"; }
+    font-family: "Futura Round";
+    font-size: 14px; }
     .reservation__price span {
       font-size: 150%; }
   .reservation__status {
@@ -2190,8 +2232,18 @@ p.people-name {
       font-size: 12px;
       color: #a9a9a9; }
     .userlist__item__title {
+      position: relative;
       font-size: 14px;
-      font-weight: 600; }
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 190px;
+      padding-right: 24px; }
+      .userlist__item__title .badge {
+        position: absolute;
+        right: 0;
+        top: 0; }
     .userlist__item__last {
       overflow: hidden;
       white-space: nowrap;
@@ -2234,7 +2286,8 @@ p.people-name {
     padding: 15px 15px 5px;
     max-width: 60%;
     background: #FFF;
-    margin: 6px 0; }
+    margin: 6px 0;
+    float: left; }
     .msglist__item--your {
       flex-direction: row-reverse;
       text-align: right;

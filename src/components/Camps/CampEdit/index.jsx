@@ -18,13 +18,13 @@ class CampEdit extends Component {
 
   inputs = {}
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    // this.state = {
-    //   obj: props.obj,
-    // }
-  }
+  //   // this.state = {
+  //   //   obj: props.obj,
+  //   // }
+  // }
 
   onClose = () => {
     this.props.setUpdatedCamp(null);
@@ -71,14 +71,14 @@ class CampEdit extends Component {
         </div>
         <h5>{_TRANS('camp', 'actions')}:</h5>
         <div className="admin__camp__footer form-group flex-row flex-row--vcenter">
-          {obj.status_id != 2 && (
+          {obj.status_id !== 2 && (
             <button type="button" className="btn btn-info" onClick={this.props.setStatus.bind(this, 2)}>{_TRANS('all', 'moderate')}</button>
           )}
-          {obj.status_id == 4 
+          {obj.status_id === 4 
             ? <button type="button" className="btn btn-default" onClick={this.props.setStatus.bind(this, 5)}>{_TRANS('all', 'unarchive')}</button>
             : <button type="button" className="btn btn-default" onClick={this.props.setStatus.bind(this, 4)}>{_TRANS('all', 'archive')}</button>
           }
-          {obj.status_id != 5
+          {obj.status_id !== 5
             ? <button type="button" className="btn btn-warning" onClick={this.props.setStatus.bind(this, 5)}>{_TRANS('all', 'hide')}</button>
             : null
           }

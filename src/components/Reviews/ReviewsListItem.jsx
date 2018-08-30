@@ -20,7 +20,7 @@ class ReviewsListItemComment extends Component {
   toggleCommentEdit = () => {
     if (
       this.state.isEdited
-      && this.inputs.text.value != this.props.obj.text
+      && this.inputs.text.value !== this.props.obj.text
     ) {
       this.props.onUpdateReview(this.props.obj.id, {
         text: this.inputs.text.value,

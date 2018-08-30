@@ -13,9 +13,9 @@ class CampItem extends Component {
     isUpdate: false,
   }
 
-  constructor (props) {
-    super(props);
-  }
+  // constructor (props) {
+  //   super(props);
+  // }
 
   onUpdate = () => {
     this.props.setUpdatedCamp(this.props.obj.id);
@@ -26,7 +26,7 @@ class CampItem extends Component {
   }
 
   setStatus = (status_id) => {
-    if (status_id != 3 && status_id != 5) {
+    if (status_id !== 3 && status_id !== 5) {
       this.props.setUpdatedCamp(null);
     }
     this.props.onUpdateCamp(this.props.obj.id, {
@@ -60,7 +60,7 @@ class CampItem extends Component {
                     <div>{_TRANS('camp', 'id_ucase')} <span>{obj.external_id}</span> </div>
                     <div>{_TRANS('camp', 'address')} <span>{obj.address}</span> </div>
                   </div>
-                  {(obj.status_id == 3 || obj.status_id == 5) 
+                  {(obj.status_id === 3 || obj.status_id === 5) 
                     ? (
                       <div className="admin__camp__actions">
                         <button className="btn btn-link" type="button" onClick={this.onUpdate}>{_TRANS('all', 'edit')}</button>
@@ -81,17 +81,17 @@ class CampItem extends Component {
                 </div>
               </div>
               <div className="admin__camp__footer">
-                {obj.status_id != 2 && obj.status_id != 1
+                {obj.status_id !== 2 && obj.status_id !== 1
                   ? (
                     <button type="button" className="btn btn-info" onClick={this.setStatus.bind(this, 2)}>{_TRANS('all', 'moderate')}</button>
                   )
                   : null
                 }
-                {obj.status_id == 4 
+                {obj.status_id === 4 
                   ? <button type="button" className="btn btn-default" onClick={this.setStatus.bind(this, 5)}>{_TRANS('all', 'unarchive')}</button>
                   : <button type="button" className="btn btn-default" onClick={this.setStatus.bind(this, 4)}>{_TRANS('all', 'archive')}</button>
                 }
-                {obj.status_id != 5
+                {obj.status_id !== 5
                   ? <button type="button" className="btn btn-warning" onClick={this.setStatus.bind(this, 5)}>{_TRANS('all', 'hide')}</button>
                   : null
                 }
@@ -122,9 +122,9 @@ class CampsList extends Component {
     updatedCampId: null
   }
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   setUpdatedCamp = (id) => {
     this.state.makeUpdatedCamp(id);
@@ -144,10 +144,10 @@ class CampsList extends Component {
     for (let i in list) {
       let camp = {...list[i]};
       let isUpdate = false;
-      if (updatedCampId && updatedCampId == camp.id) {
+      if (updatedCampId && updatedCampId === camp.id) {
         isUpdate = true;
       }
-      if (updatedCampProps && updatedCampProps.id == camp.id) {
+      if (updatedCampProps && updatedCampProps.id === camp.id) {
         Object.assign(camp, updatedCampProps);
       }
       camps.push(

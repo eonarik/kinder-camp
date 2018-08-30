@@ -134,7 +134,7 @@ class CampEditParamsTabContent extends Component {
       this.props.onDeleteParam(param_id).then(() => {
         let params = [...this.state._params];
         for (let i in params) {
-          if (params[i].id == param_id) {
+          if (params[i].id === param_id) {
             params.splice(i, 1);
             break;
           }

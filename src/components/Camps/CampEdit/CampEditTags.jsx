@@ -24,7 +24,7 @@ class CampEditTags extends Component {
       if (tags.indexOf(type_id) >= 0) {
         for (let i in tags) {
           let tag = tags[i];
-          if (type_id == tag) {
+          if (type_id === tag) {
             tags.splice(i, 1);
           }
         }
@@ -45,10 +45,10 @@ class CampEditTags extends Component {
 
       for (let id in obj.all_tags) {
         let tag = obj.all_tags[id];
-        let isActive = this.state.tags && this.state.tags.indexOf(parseInt(id)) >= 0;
+        let isActive = this.state.tags && this.state.tags.indexOf(parseInt(id, 10)) >= 0;
         _tags.push(
           <li key={id} className={(isActive ? " active" : "")}>
-            <a onClick={this.updateTag.bind(this, parseInt(id), {
+            <a onClick={this.updateTag.bind(this, parseInt(id, 10), {
               deleted: isActive
             })}>{tag}</a>
           </li>

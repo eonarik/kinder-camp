@@ -83,10 +83,10 @@ class Lk extends Component {
       password_new,
       password_new_confirm
     }).then(() => {
-      new Noty({
-        text: 'Успешная смена пароля',
-        type: 'success',
-      }).show();
+      // new Noty({
+      //   text: 'Успешная смена пароля',
+      //   type: 'success',
+      // }).show();
       this.inputs.password_old.value = '';
       this.inputs.password_new.value = '';
       this.inputs.password_new_confirm.value = '';

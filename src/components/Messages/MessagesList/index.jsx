@@ -58,6 +58,7 @@ class MessagesList extends Component {
   pressEnter = (e) => {
     if (
       e.key === 'Enter'
+      && !e.shiftKey
     ) {
       this.addMessage();
       return false;

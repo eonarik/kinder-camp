@@ -34,10 +34,10 @@ class VacanciesListVacancy extends Component {
   publishToggle = () => {
     let obj = this.props.obj;
     this.props.updateVacancy(obj.id, {
-      published: this.state.published == 1 ? 0 : 1
+      published: parseInt(this.state.published, 10) === 1 ? 0 : 1
     }).then((object) => {
       this.setState({
-        published: object.published == 1 ? 1 : 0
+        published: parseInt(object.published, 10) === 1 ? 1 : 0
       });
     });
   }
@@ -63,7 +63,7 @@ class VacanciesListVacancy extends Component {
     let obj = this.props.obj;
     return !this.state.isUpdate
       ? (
-        <div className={"vacancy" + (this.state.published == 1 ? ' vacancy--active' : '')}>
+        <div className={"vacancy" + (parseInt(this.state.published, 10) === 1 ? ' vacancy--active' : '')}>
           <div className="row">
             <div className="col-xs-12 col-md-9">
               <h4>{obj.pagetitle}</h4>
@@ -101,9 +101,9 @@ class VacanciesListVacancy extends Component {
               </div>
 
               <div>
-                {this.state.published != 1
+                {this.state.published !== 1
                   ? (
-                      <a className="vacancy__link" className="btn btn-link" onClick={this.toggleUpdate}>Редактировать</a>
+                    <a className="btn btn-link" onClick={this.toggleUpdate}>Редактировать</a>
                   )
                   : (
                     <small className="text-muted">Редактирование возможно только для неопубликованных вакансий.</small>
@@ -111,12 +111,12 @@ class VacanciesListVacancy extends Component {
                 }
               </div>
               <div>
-                <a className="vacancy__link" className="btn btn-link" onClick={this.publishToggle}>
-                  {this.state.published == 1 ? 'Снять с публикации' : 'Опубликовать'}
+                <a className="btn btn-link" onClick={this.publishToggle}>
+                  {this.state.published === 1 ? 'Снять с публикации' : 'Опубликовать'}
                 </a>
               </div>
               <div>
-                <a className="vacancy__link" className="btn btn-link" onClick={this.deleteToggle}>
+                <a className="btn btn-link" onClick={this.deleteToggle}>
                   <i className="fa fa-trash"></i> Удалить вакансию
                 </a>
               </div>

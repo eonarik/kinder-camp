@@ -28,7 +28,7 @@ class CampStore extends ReduceStore {
       case UPDATE_CAMP:
         let camps = state.get('camps');
         for (let i in camps) {
-          if (camps[i].id == action.updatedCampProps.id) {
+          if (camps[i].id === action.updatedCampProps.id) {
             Object.assign(camps[i], action.updatedCampProps);
             state.set('camps', camps)
             break;
