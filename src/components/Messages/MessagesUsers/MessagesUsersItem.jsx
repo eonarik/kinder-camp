@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 class MessagesUsersItem extends Component {
+
   render() {
     let obj = this.props.obj;
-    // userlist__item--active
+
     return (
       <div className={"userlist__item" + (this.props.isActive ? ' userlist__item--active' : '')+ (obj.unread_messages > 0 ? ' userlist__item--unread' : '')} onClick={this.props.setDialog.bind(this, obj)}>
         <div>

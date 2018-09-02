@@ -78,7 +78,7 @@ class CampEditProgram extends Component {
       let _flag = true;
       for (let j in this.state._programs) {
         let _program = this.state._programs[j];
-        if (program.id == _program.id) {
+        if (program.id === _program.id) {
           _flag = false;
           break;
         }
@@ -100,7 +100,7 @@ class CampEditProgram extends Component {
       _programs.push(
         <div key={program.id} className="admin__programs-item">
           <a className="admin__programs-item-link">{program.name}</a>
-          <a className="admin__programs-item-close" data-toggle="tooltip" title={_TRANS('all', 'delete')} onClick={this.onUnlinkProgram.bind(this, program.id)}></a>
+          <a className="admin__programs-item-close" onClick={this.onUnlinkProgram.bind(this, program.id)}>&times;</a>
         </div>
       );
     }

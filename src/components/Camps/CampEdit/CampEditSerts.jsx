@@ -52,7 +52,7 @@ class CampTariff extends Component {
       this.state.onDeleteFile(id).then(() => {
         let _files = [...this.state._files];
         for (let i in _files) {
-          if (_files[i].id == id) {
+          if (_files[i].id === id) {
             _files.splice(i, 1);
             break;
           }
@@ -78,7 +78,6 @@ class CampTariff extends Component {
   }
 
   render() {
-    const obj = this.props.obj;
     let _serts = [];
     if (this.state._files.length) {
       for (let i in this.state._files) {

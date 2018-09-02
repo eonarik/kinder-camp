@@ -1,4 +1,4 @@
-import Actions from '../data/Actions';
+import Actions from '../data/Actions/request';
 import { notyConfig } from '../config';
 
 // заменить на получение токена с сервера!
@@ -13,16 +13,26 @@ Noty.overrideDefaults(notyConfig);
 
 const request = function (action, params, callback, error) {
   var formData;
+
   var is_notify = true;
   if (typeof params.not_notify !== 'undefined') {
     is_notify = false;
     delete params.not_notify;
   }
+
   var is_loader = true;
   if (typeof params.not_loader !== 'undefined') {
     is_loader = false;
     delete params.not_loader;
   }
+
+  // с этим возникает ошибка 
+  // Cannot dispatch in the middle of a dispatch.
+  // надо разобраться
+  // if (is_loader) {
+  //   Actions.startRequest();
+  // }
+
   if (params instanceof FormData) {
     formData = params;
   } else {
@@ -35,22 +45,20 @@ const request = function (action, params, callback, error) {
 
   var url = action;
 
-  if (is_loader) {
-    Actions.startRequest();
-  }
   fetch(url, {
     method: 'post',
     // credentials: 'same-origin',
     // mode: 'no-cors',
     body: formData,
   })
-    .then(function (response) {
+    .then((response) => {
       return response.json();
     })
-    .then(function (data) {
-      if (is_loader) {
-        Actions.endRequest();
-      }
+    .then((data) => {
+      // if (is_loader) {
+      //   Actions.endRequest();
+      // }
+
       if (data.success) {
         if (data.message && is_notify) {
           new Noty({
@@ -60,6 +68,7 @@ const request = function (action, params, callback, error) {
         }
       } else {
         if (data.message) {
+
           if (is_notify) {
             new Noty({
               text: data.message,
@@ -67,6 +76,7 @@ const request = function (action, params, callback, error) {
             }).show();
           }
         } else if (data.data.length) {
+
           if (is_notify) {
             for (let i in data.data) {
               new Noty({
@@ -84,17 +94,17 @@ const request = function (action, params, callback, error) {
         callback.call(this, data);
       }
     })
-    .catch(function (error) {
+    .catch((error) => {
       if (is_loader) {
         Actions.endRequest();
       }
       console.log(error);
-      if (is_notify) {
-        new Noty({
-          text: 'Ошибка получения данных',
-          type: 'error',
-        }).show();
-      }
+      // if (is_notify) {
+      //   new Noty({
+      //     text: 'Ошибка получения данных',
+      //     type: 'error',
+      //   }).show();
+      // }
     });
 }
 

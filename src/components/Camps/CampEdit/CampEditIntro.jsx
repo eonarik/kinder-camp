@@ -72,7 +72,7 @@ class CampEditIntro extends Component {
       this.state.onDeleteFile(id).then(() => {
         let _images = [...this.state._images];
         for (let i in _images) {
-          if (_images[i].id == id) {
+          if (_images[i].id === id) {
             _images.splice(i, 1);
             break;
           }

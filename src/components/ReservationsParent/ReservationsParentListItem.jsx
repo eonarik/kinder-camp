@@ -66,7 +66,7 @@ class ReservationsParentListItem extends Component {
               <div className="reservation__price">
                 {obj.count} х {obj.tariff_price} р. = <span>{obj.tariff_price * obj.count}</span> р.
               </div>
-              <a className="btn btn-success btn-sm" href="#" target="_blank">Онлайн оплата</a>
+              <a className="btn btn-success btn-sm" href="/payment/" target="_blank">Онлайн оплата</a>
             </div>
             <div className="reservation__block col-xs-12 col-md-2">
               <div className="reservation__status" style={{

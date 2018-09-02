@@ -2178,6 +2178,57 @@ p.people-name {
   .reviews__comment__text {
     margin-bottom: 10px; }
 
+.my-review {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: #f7f7f7;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #CCC; }
+  .my-review--deleted {
+    background: #fdf0ef;
+    border-color: #e95a50; }
+  .my-review__camp__title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px; }
+  .my-review__camp__id {
+    color: #69bc5d;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px; }
+  .my-review__title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px; }
+  .my-review__date {
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #666; }
+  .my-review__rating {
+    margin-left: 15px;
+    font-size: 16px; }
+    .my-review__rating > .fa {
+      margin-left: 3px;
+      color: #ffa800; }
+  .my-review__text {
+    margin-bottom: 5px; }
+  .my-review__ext {
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 5px; }
+  .my-review__status {
+    font-family: "Futura Round";
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px; }
+    .my-review__status--deleted {
+      color: #e95a50; }
+    .my-review__status--success {
+      color: #69bc5d; }
+
 .messages {
   position: relative;
   background: #f7f7f7;
@@ -2202,7 +2253,6 @@ p.people-name {
     padding: 15px; }
   .userlist__item {
     display: flex;
-    align-items: center;
     padding: 15px;
     border-bottom: 1px solid #CCC; }
     .userlist__item:hover:not(.userlist__item--active) {
@@ -2227,7 +2277,8 @@ p.people-name {
         display: block; }
     .userlist__item__body {
       position: relative;
-      flex-grow: 1; }
+      flex-grow: 1;
+      margin-top: -3px; }
     .userlist__item__date {
       font-size: 12px;
       color: #a9a9a9; }
@@ -2235,15 +2286,13 @@ p.people-name {
       position: relative;
       font-size: 14px;
       font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       max-width: 190px;
       padding-right: 24px; }
       .userlist__item__title .badge {
         position: absolute;
         right: 0;
-        top: 0; }
+        top: 0;
+        background: #1ba7dd; }
     .userlist__item__last {
       overflow: hidden;
       white-space: nowrap;

@@ -63,20 +63,20 @@ class Camps extends Component {
 
         <ul className="admin__tabs row">
           <li className={"col-xs-12 col-md-6" + (this.state.activeTab === 0 ? ' active' : '')}>
-            <a href="javascript:;" className="admin__tabs__item" onClick={this.activateTab.bind(this, 0)}>{_TRANS('all', 'list_camp')}</a>
-            <a href="javascript:;" className="btn btn-icon btn-icon--add" data-action="add-camp"
+            <button type="button" className="admin__tabs__item" onClick={this.activateTab.bind(this, 0)}>{_TRANS('all', 'list_camp')}</button>
+            <button type="button" className="btn btn-icon btn-icon--add" data-action="add-camp"
               onClick={this.onNewCamp}
             >
               <span>{_TRANS('all', 'add_camp')}</span>
-            </a>
+            </button>
           </li>
           <li className={"col-xs-12 col-md-6" + (this.state.activeTab === 1 ? ' active' : '')}>
-            <a href="javascript:;" className="admin__tabs__item" onClick={this.activateTab.bind(this, 1)}>{_TRANS('all', 'list_program')}</a>
-            <a href="javascript:;" className="btn btn-icon btn-icon--add" data-action="add-program"
+            <button type="button" className="admin__tabs__item" onClick={this.activateTab.bind(this, 1)}>{_TRANS('all', 'list_program')}</button>
+            <button type="button" className="btn btn-icon btn-icon--add" data-action="add-program"
               onClick={this.onNewProgram}
             >
               <span>{_TRANS('all', 'add_program')}</span>
-            </a>
+            </button>
           </li>
         </ul>
 

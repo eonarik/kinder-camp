@@ -88,11 +88,11 @@ class ProgramsList extends Component {
       let program = list[i];
       let isUpdate = false;
 
-      if (this.state.updatedProgramId && program.id == this.state.updatedProgramId) {
+      if (this.state.updatedProgramId && program.id === this.state.updatedProgramId) {
         isUpdate = true;
       }
 
-      if (this.state.updatedProgramProps && program.id == this.state.updatedProgramProps.id) {
+      if (this.state.updatedProgramProps && program.id === this.state.updatedProgramProps.id) {
         program = Object.assign(program, this.state.updatedProgramProps);
       }
 

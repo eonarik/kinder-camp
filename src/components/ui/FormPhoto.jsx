@@ -83,6 +83,8 @@ class FormControl extends Component {
           </div>
         );
         break;
+        
+      default:
     }
     return cmp;
   }

@@ -5,7 +5,6 @@ import {
 } from "../../const/url";
 
 import {
-  UPDATE_TAG,
   RECEIVE_STATUSES_LIST,
   RECEIVE_CAMPS_LIST,
   UPDATE_CAMP,

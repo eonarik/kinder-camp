@@ -70,7 +70,7 @@ class Lk extends Component {
       return;
     }
 
-    if (password_new != password_new_confirm) {
+    if (password_new !== password_new_confirm) {
       new Noty({
         text: 'Введенные пароли не совпадают!',
         type: 'error',
@@ -379,10 +379,10 @@ class Lk extends Component {
                   <div className="col-xs-12 col-sm-6">
                     <h3 className="settings__subtitle">Договор и реквизиты</h3>
                     <p>
-                      <a href="#" className="btn btn-success btn-lg btn-block btn-rounded">Заполнить реквизиты</a>
+                      <button type="button" className="btn btn-success btn-lg btn-block btn-rounded">Заполнить реквизиты</button>
                     </p>
                     <p>
-                      <a href="#" className="btn btn-danger btn-lg btn-block btn-rounded">Скачать договор</a>
+                      <button type="button" className="btn btn-danger btn-lg btn-block btn-rounded">Скачать договор</button>
                     </p>
                   </div>
                   <div className="col-xs-12 col-md-6">
@@ -419,14 +419,14 @@ class Lk extends Component {
                       КПП 910301001<br />
                     </p>
 
-                    <p><a href="#" className="text-underline">Редактировать</a></p>
+                    <p><button type="button" className="text-underline">Редактировать</button></p>
                   </div>
                 </div>
               </div>
 
               <div className="row flex-row flex-row--vcenter">
                 <div className="col-xs-6 text-center">
-                  <a href="#" className="text-underline">
+                  <a href="/support/" className="text-underline">
                     Связаться с поддержкой
                   </a>
                 </div>

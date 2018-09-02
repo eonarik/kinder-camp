@@ -58,7 +58,7 @@ class VacancyAddForm extends Component {
       let camp = camps[i];
       campsOption.push(
         <option key={camp.id} value={camp.id}
-         selected={obj && obj.tvs.camp_id && obj.tvs.camp_id.value == camp.id}
+         selected={obj && obj.tvs.camp_id && obj.tvs.camp_id.value === camp.id}
         >{camp.name}</option>
       );
     }
@@ -73,7 +73,7 @@ class VacancyAddForm extends Component {
                 id="vacancy-name"
                 name="pagetitle"
                 errorMessage={errors.pagetitle || ''}
-                defaultValue={obj && obj.pagetitle || ''}
+                defaultValue={(obj && obj.pagetitle) || ''}
               />
               <FormControl
                 label="Требования к кандидату"
@@ -81,7 +81,7 @@ class VacancyAddForm extends Component {
                 id="vacancy-requirements"
                 name="requirements"
                 errorMessage={errors.requirements || ''}
-                defaultValue={obj && obj.tvs.requirements && obj.tvs.requirements.value || ''}
+                defaultValue={(obj && obj.tvs.requirements && obj.tvs.requirements.value) || ''}
               />
               <FormControl
                 label="Дополнительная иформация по вакансии"
@@ -89,7 +89,7 @@ class VacancyAddForm extends Component {
                 id="vacancy-content"
                 name="content"
                 errorMessage={errors.content || ''}
-                defaultValue={obj && obj.content || ''}
+                defaultValue={(obj && obj.content) || ''}
               />
             </div>
             <div className="col-xs-12 col-md-6">
@@ -114,14 +114,14 @@ class VacancyAddForm extends Component {
                 id="vacancy-official_duties"
                 name="official_duties"
                 errorMessage={errors.official_duties || ''}
-                defaultValue={obj && obj.tvs.official_duties && obj.tvs.official_duties.value || ''}
+                defaultValue={(obj && obj.tvs.official_duties && obj.tvs.official_duties.value) || ''}
               />
               <FormControl
                 label="Бонусы"
                 id="vacancy-bonuses"
                 name="bonuses"
                 errorMessage={errors.bonuses || ''}
-                defaultValue={obj && obj.tvs.bonuses && obj.tvs.bonuses.value || ''}
+                defaultValue={(obj && obj.tvs.bonuses && obj.tvs.bonuses.value) || ''}
               />
             </div>
           </div>
@@ -132,7 +132,7 @@ class VacancyAddForm extends Component {
                 id="vacancy-wages"
                 name="wages"
                 errorMessage={errors.wages || ''}
-                defaultValue={obj && obj.tvs.wages && obj.tvs.wages.value || ''}
+                defaultValue={(obj && obj.tvs.wages && obj.tvs.wages.value) || ''}
               />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
@@ -141,7 +141,7 @@ class VacancyAddForm extends Component {
                 id="vacancy-employment_type"
                 name="employment_type"
                 errorMessage={errors.employment_type || ''}
-                defaultValue={obj && obj.tvs.employment_type && obj.tvs.employment_type.value || ''}
+                defaultValue={(obj && obj.tvs.employment_type && obj.tvs.employment_type.value) || ''}
               />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
@@ -150,7 +150,7 @@ class VacancyAddForm extends Component {
                 id="vacancy-bonuses"
                 name="experience"
                 errorMessage={errors.experience || ''}
-                defaultValue={obj && obj.tvs.experience && obj.tvs.experience.value || ''}
+                defaultValue={(obj && obj.tvs.experience && obj.tvs.experience.value) || ''}
               />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
@@ -159,13 +159,13 @@ class VacancyAddForm extends Component {
                 id="vacancy-education"
                 name="education"
                 errorMessage={errors.education || ''}
-                defaultValue={obj && obj.tvs.education && obj.tvs.education.value || ''}
+                defaultValue={(obj && obj.tvs.education && obj.tvs.education.value) || ''}
               />
             </div>
           </div>
           <div className="form-group">
             <button className="btn btn-danger">Сохранить</button> &nbsp;&nbsp;
-            <a className="vacancy__link" className="btn btn-default" onClick={this.props.onCancel}>
+            <a className="btn btn-default" onClick={this.props.onCancel}>
               <i className="fa fa-cancel"></i> Отмена
             </a>
           </div>

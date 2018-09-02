@@ -4,7 +4,6 @@ import {
 
 import { 
   RECEIVE_RESERVATIONS_LIST,
-  UPDATE_RESERVATION
 } from "../ActionTypes.js";
 
 import _Dispatcher from "../_Dispatcher.js";

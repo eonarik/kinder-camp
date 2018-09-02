@@ -1,4 +1,4 @@
-const get2obj = () => {
+const get2obj = function () {
   if (window.location.search) {
     let _get = {};
     let get = window.location.search.replace(/^\?/, '').split('&');
@@ -10,4 +10,5 @@ const get2obj = () => {
   }
   return {};
 }
-export default get2obj;
+// export default get2obj;
+module.exports = get2obj;

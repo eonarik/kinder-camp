@@ -52,7 +52,7 @@ class CampTariff extends Component {
       this.state.onDeleteFile(id).then(() => {
         let _files = [...this.state._files];
         for (let i in _files) {
-          if (_files[i].id == id) {
+          if (_files[i].id === id) {
             _files.splice(i, 1);
             break;
           }
@@ -78,7 +78,6 @@ class CampTariff extends Component {
   }
 
   render() {
-    const obj = this.props.obj;
     let _serts = [];
     if (this.state._files.length) {
       for (let i in this.state._files) {
@@ -104,9 +103,9 @@ class CampTariff extends Component {
         {_serts}
 
         <p>
-          <a href="javascript: void(0);" className="btn btn-icon btn-icon--add" onClick={this.onAddFile.bind(this, 4)}>
+          <button type="button" className="btn btn-icon btn-icon--add" onClick={this.onAddFile.bind(this, 4)}>
             <span>{_TRANS('all', 'add_sertificate')}</span>
-          </a>
+          </button>
         </p>
 
         <input type="file"

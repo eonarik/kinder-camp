@@ -21,7 +21,7 @@ class LkParentChangePassword extends Component {
       return;
     }
 
-    if (password_new != password_new_confirm) {
+    if (password_new !== password_new_confirm) {
       new Noty({
         text: 'Введенные пароли не совпадают!',
         type: 'error',
@@ -45,8 +45,6 @@ class LkParentChangePassword extends Component {
   }
 
   render() {
-    let userProfile = {};
-
     return (
       <div>
         <h3 className="settings__subtitle">Сменить пароль</h3>
@@ -83,7 +81,7 @@ class LkParentChangePassword extends Component {
           </div>
           <div className="col-xs-12 col-md-4">
             <div className="form-group text-center">
-              <a href="#" className="text-underline">
+              <a href="/support/" className="text-underline">
                 Связаться с поддержкой
               </a>
             </div>

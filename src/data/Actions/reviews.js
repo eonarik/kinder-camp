@@ -4,7 +4,6 @@ import {
 
 import { 
   RECEIVE_REVIEWS_LIST,
-  RECEIVE_COMMENTS_LIST,
 } from "../ActionTypes.js";
 
 import _Dispatcher from "../_Dispatcher.js";

@@ -4,7 +4,6 @@ import {
 
 import { 
   RECEIVE_VACANCIES_LIST,
-  UPDATE_VACANCY
 } from "../ActionTypes.js";
 import _Dispatcher from "../_Dispatcher.js";
 

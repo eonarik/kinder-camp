@@ -47,13 +47,18 @@ class CampEditMemory extends Component {
       this.changeInputCounter--;
       if (this.changeInputCounter === 0) {
         // update
-        let values = [];
         let params = this.state.params;
 
         for (let key in this.inputs) {
           let value = this.inputs[key].value;
 
-          if (typeof params[key] === 'undefined' || value && params[key].value !== value) {
+          if (
+            typeof params[key] === 'undefined' 
+            || (
+              value 
+              && params[key].value !== value
+            )
+          ) {
             let type_id = key.replace('prop_', '');
 
             this.state.onUpdateParam({
@@ -87,7 +92,6 @@ class CampEditMemory extends Component {
   }
 
   render() {
-    let obj = this.props.obj;
     let params = this.state.params;
 
     return (

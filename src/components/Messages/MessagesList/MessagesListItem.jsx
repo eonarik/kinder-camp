@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class MessagesListItem extends Component {
   render() {
     let obj = this.props.obj;
-    let isYour = obj.your_id == obj.sender;
+    let isYour = obj.your_id === obj.sender;
     // msglist__item--your
     return (
       <div style={{

@@ -6,6 +6,8 @@ import ActionsUsers from "./data/Actions/users";
 import RequestStore from "./data/RequestStore";
 import UserStore from "./data/UserStore";
 
+import { Switch, Route, Link } from 'react-router-dom';
+
 import Lk from './components/Lk';
 import LkParent from './components/LkParent';
 import Camps from './components/Camps';
@@ -13,6 +15,7 @@ import Reservations from './components/Reservations';
 import ReservationsParent from './components/ReservationsParent';
 import Vacancies from './components/Vacancies';
 import Reviews from './components/Reviews';
+import MyReviews from './components/MyReviews';
 import Messages from './components/Messages';
 
 import './styles/scss/style.css';
@@ -27,50 +30,9 @@ const tpls = {
   ReservationsParent,
   Vacancies,
   Reviews,
+  MyReviews,
   Messages,
 };
-
-// class Message extends Component {
-//   static defaultProps = {
-//     type: 'loading',
-//     text: '',
-//   }
-
-//   msg = {
-//     loading: {
-//       cls: 'alert-warning',
-//       icon: <i className="fa fa-spinner fa-pulse"></i>,
-//       text: _TRANS('all', 'loading') + '...'
-//     },
-//     danger: {
-//       cls: 'alert-danger',
-//       icon: <i className="fa fa-times"></i>,
-//     },
-//     success: {
-//       cls: 'alert-success',
-//       icon: <i className="fa fa-check"></i>,
-//     },
-//   };
-
-//   render() {
-//     let msg = this.msg[this.props.type];
-//     if (this.props.text) {
-//       msg.text = this.props.text;
-//     }
-//     return (
-//       <div className={"loader alert " + msg.cls}>
-//         <div className="loader__status">
-//           <div className="loader__status__icon">
-//             {msg.icon}
-//           </div>
-//         </div>
-//         <div className="loader__text">
-//           {msg.text}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 
 class App extends Component {
 
@@ -92,17 +54,6 @@ class App extends Component {
   constructor (props) {
     super(props);
 
-    // отреагируем на кнопки истории
-    window.onpopstate = (event) => {
-      if (
-        event.state 
-        && typeof event.state.index !== 'undefined'
-        && typeof event.state.tab !== 'undefined'
-      ) {
-        this.setTab(event.state.index, event.state.tab, false, event);
-      }
-    };
-
     this.state = {
       statusMessages: [],
       currentTabIndex: 0,
@@ -110,19 +61,10 @@ class App extends Component {
   }
 
   setTab = (index, tab, addHistory, e) => {
-    e.preventDefault();
+    // e.preventDefault();
     this.setState({
       currentTabIndex: index,
     });
-
-    if (addHistory && window.location.pathname !== tab.uri) {
-      window.history.pushState({
-        page: tab.uri,
-        type: "tab",
-        index,
-        tab,
-      }, tab.pagetitle, tab.uri);
-    }
   }
 
   componentDidMount = () => {
@@ -152,39 +94,41 @@ class App extends Component {
       return null;
     }
 
-    let tabContent = null;
-    const _tabs = [];
+    let _tabContent = [];
+    let _tabs = [];
     const _currentTabIndex = this.state.currentTabIndex
     const _currentTab = tabs[_currentTabIndex];
     for (let i in tabs) {
       let tab = tabs[i];
       _tabs.push(
         <li key={tab.id} className={_currentTabIndex === i ? 'active' : ''}>
-          <a href={tab.uri} onClick={this.setTab.bind(this, i, tab, true)}>{tab.pagetitle}</a>
+          <Link to={'/' + tab.uri} onClick={this.setTab.bind(this, i, tab, true)}>{tab.pagetitle}</Link>
         </li>
       );
 
-      if (_currentTabIndex === i) {
+      if (typeof tpls[tab.tpl] !== 'undefined') {
+        let Tpl = tpls[tab.tpl];
+
         switch (tab.tpl) {
-          case 'LkParent':
-            tabContent = <LkParent 
-              userProfile={this.state.userProfile}
-              onUpdateUserProfile={this.state.onUpdateUserProfile}
-            />;
-            break;
-            
+          case 'LkParent':          
           case 'Lk':
-            tabContent = <Lk 
-              userProfile={this.state.userProfile}
-              onUpdateUserProfile={this.state.onUpdateUserProfile}
-            />;
+            _tabContent.push(
+              <Route key={tab.id} exact path={'/' + tab.uri} render={(props) => (
+                <Tpl 
+                  {...props}
+                  userProfile={this.state.userProfile}
+                  onUpdateUserProfile={this.state.onUpdateUserProfile}
+                />
+              )} />
+            );
             break;
           
           default:
-            if (typeof tpls[tab.tpl] !== 'undefined') {
-              let Tpl = tpls[tab.tpl];
-              tabContent = <Tpl />;
-            }
+            _tabContent.push(
+              <Route key={tab.id} exact path={'/' + tab.uri} render={(props) => (
+                <Tpl {...props} />
+              )} />
+            );
         }
       }
     }
@@ -223,7 +167,10 @@ class App extends Component {
           {_tabs}
         </ul>
         
-        {tabContent}
+        <Switch>
+          {_tabContent}
+          <Route render={() => <h4>404 Page not found</h4>} />
+        </Switch>
       </div>
     );
   }

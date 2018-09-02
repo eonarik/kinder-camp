@@ -5,13 +5,14 @@ import {
 import { 
   RECEIVE_DIALOGS_LIST,
   RECEIVE_MESSAGES_LIST,
-  ADD_MESSAGE,
   SET_DIALOG,
 } from "../ActionTypes.js";
 
 import _Dispatcher from "../_Dispatcher.js";
 
 import request from '../../inc/request';
+import get2obj from '../../inc/get2obj';
+let _get = get2obj();
 
 let Actions = {};
 
@@ -28,11 +29,16 @@ Actions.receiveDialogList = function (options = {}) {
 };
 
 Actions.setDialog = function (dialog) {
-  return new Promise((resolve, reject) => {
-    _Dispatcher.dispatch({
-      type: SET_DIALOG,
-      activeDialog: dialog
-    });
+  if (_get.d !== dialog.dialog_id) {
+    window.history.pushState({
+      dialog_id: dialog.dialog_id,
+      ...window.history.state
+    }, '', window.location.pathname + '?d=' + dialog.dialog_id);
+  }
+
+  _Dispatcher.dispatch({
+    type: SET_DIALOG,
+    activeDialog: dialog
   });
 };
 

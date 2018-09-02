@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import FormControl from '../ui/FormControl';
-
 class LkParentNotify extends Component {
   inputs = {}
 

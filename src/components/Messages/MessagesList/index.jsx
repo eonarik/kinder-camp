@@ -6,6 +6,8 @@ import Actions from '../../../data/Actions/messages';
 
 import MessagesListItem from './MessagesListItem';
 
+// let _get = require('../../../inc/get2obj')();
+
 class MessagesList extends Component {
 
   inputs = {}
@@ -25,6 +27,7 @@ class MessagesList extends Component {
       onAddMessage: Actions.addMessage,
       onUpdateMessage: Actions.updateMessage,
       onReceiveMessages: Actions.receiveMessages,
+      onReceiveDialogList: Actions.receiveDialogList,
       messages: MessagesStore.getState().get('messages'),
       totalMessages: MessagesStore.getState().get('totalMessages'),
     };
@@ -67,7 +70,7 @@ class MessagesList extends Component {
 
   moreMessages = () => {
     let nextPage = (this.state.page + 1);
-    this.state.onReceiveMessages(this.props.dialog.dialog_id, {
+    this.state.onReceiveMessages(this.props.activeDialog.dialog_id, {
       limit: nextPage * this.state.limit
     }).then(() => {
       this.setState({
@@ -82,20 +85,20 @@ class MessagesList extends Component {
     let messages = this.state.messages;
     for (let i in messages) {
       let message = messages[i];
-      if (!message.is_read && message.your_id != message.sender) {
+      if (!message.is_read && message.your_id !== message.sender) {
         unreadingCount++;
       }
     }
     for (let i in messages) {
       let message = messages[i];
-      if (!message.is_read && message.your_id != message.sender) {
+      if (!message.is_read && message.your_id !== message.sender) {
         this.state.onUpdateMessage(message.id, {
           is_read: 1,
           not_notify: true,
         }).then(() => {
           if (++readingCount >= unreadingCount) {
-            Actions.receiveDialogList();
-            this.state.onReceiveMessages(this.props.dialog.dialog_id).then(() => {
+            this.state.onReceiveDialogList();
+            this.state.onReceiveMessages(this.props.activeDialog.dialog_id).then(() => {
               this.scrollMessagesWrapper();
             });
           }
@@ -105,8 +108,9 @@ class MessagesList extends Component {
   }
 
   addMessage = (e) => {
-    let dialog = this.props.dialog;
+    let dialog = this.props.activeDialog;
     this.inputs.message.disabled = true;
+
     this.state.onAddMessage(dialog.user_id, {
       dialog_id: dialog.dialog_id,
       message: this.inputs.message.value,
@@ -119,35 +123,58 @@ class MessagesList extends Component {
     });
   }
 
+  renderMessages = (dialog_id) => {
+    this.state.onReceiveMessages(dialog_id, {
+      limit: this.state.page * this.state.limit
+    }).then(() => {
+      this.scrollMessagesWrapper();
+      this.interval = setInterval(() => {
+
+        this.state.onReceiveDialogList({
+          not_loader: true
+        });
+        this.state.onReceiveMessages(dialog_id, {
+          not_loader: true,
+          limit: this.state.page * this.state.limit
+        });
+      }, 5000);
+    });
+  }
+
   componentDidUpdate = (prevProps, prevState) => {
     if (
-      this.props.dialog
-      && prevProps.dialog
-      && prevProps.dialog.dialog_id != this.props.dialog.dialog_id 
-      || !prevProps.dialog
+      this.props.activeDialog
+      && (
+        (
+          prevProps.activeDialog
+          && prevProps.activeDialog.dialog_id !== this.props.activeDialog.dialog_id
+        )
+        || !prevProps.activeDialog
+      )
     ) {
-      this.state.onReceiveMessages(this.props.dialog.dialog_id, {
-        limit: this.state.page * this.state.limit
-      }).then(() => {
-        this.scrollMessagesWrapper();
-
+      if (this.interval) {
         clearInterval(this.interval);
-        this.interval = setInterval(() => {
-
-          Actions.receiveDialogList({
-            not_loader: true
-          });
-          Actions.receiveMessages(this.props.dialog.dialog_id, {
-            not_loader: true,
-            limit: this.state.page * this.state.limit
-          });
-        }, 5000);
-      });
+      }
+      this.renderMessages(this.props.activeDialog.dialog_id);
     }
   }
 
   componentDidMount = () => {
     this.scrollMessagesWrapper();
+
+    // отреагируем на кнопки истории
+    // window.onpopstate = (event) => {
+    //   if (
+    //     event.state 
+    //     && typeof event.state.dialog_id !== 'undefined'
+    //   ) {
+    //     this.renderMessages(event.state.dialog_id);
+    //   }
+    // };
+
+    // if (_get.d) {
+    //   this.renderMessages(_get.d);
+    // }
   }
 
   render() {
@@ -165,7 +192,7 @@ class MessagesList extends Component {
     }
     for (let i in messages) {
       let message = messages[i];
-      if (dateSentRender != message.date_sent_render) {
+      if (dateSentRender !== message.date_sent_render) {
         _messages.push(
           <div key={'date-' + i} className="msglist__date">
             {message.date_sent_render}
@@ -189,9 +216,9 @@ class MessagesList extends Component {
         );
         extMessages = [];
       }
-      if (message.hash !== this.state.hash) {
-          this.state.hash = message.hash
-      }
+      // if (message.hash !== this.state.hash) {
+      //   this.state.hash = message.hash
+      // }
     }
 
     return (

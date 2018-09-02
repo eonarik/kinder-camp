@@ -60,7 +60,7 @@ class FormControl extends Component {
               }
             </div>
             <div className={this.props.cols[1] || 'col-auto'}>
-              {this.props.type == 'textarea'
+              {this.props.type === 'textarea'
                 ? <textarea id={this.props.label} rows="5" name={this.props.name} className="form-control"
                   value={this.state.value}
                   onChange={this.onChangeInput}
@@ -88,7 +88,7 @@ class FormControl extends Component {
               ? <label htmlFor={this.props.label} className="settings__label">{this.props.label}</label>
               : null
             }
-            {this.props.type == 'textarea'
+            {this.props.type === 'textarea'
               ? <textarea id={this.props.label} rows="5" name={this.props.name} className="form-control"
                 value={this.state.value}
                 onChange={this.onChangeInput}

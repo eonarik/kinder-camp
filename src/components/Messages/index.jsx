@@ -20,7 +20,9 @@ class Messages extends Component {
   static calculateState(prevState) {
     return {
       onSetDialog: Actions.setDialog,
+      onReceiveDialogList: Actions.receiveDialogList,
       activeDialog: MessagesStore.getState().get('activeDialog'),
+      dialogs: MessagesStore.getState().get('dialogs'),
     };
   }
 
@@ -30,7 +32,7 @@ class Messages extends Component {
     });
   }
 
-  render() {
+  render() { 
     return (
       <div>
         <h4 className="text-success">Личные сообщения</h4>
@@ -38,8 +40,10 @@ class Messages extends Component {
           <div className="row row--nospacing flex-row h100">
             <div className="col-xs-12 col-lg-3">
               <MessagesUsers
+                dialogs={this.state.dialogs}
                 setDialog={this.state.onSetDialog}
                 activeDialog={this.state.activeDialog}
+                onReceiveDialogList={this.state.onReceiveDialogList}
               />
             </div>
             <div className="col-xs-12 col-lg-9">
@@ -55,7 +59,7 @@ class Messages extends Component {
                 }
               </div>
               <MessagesList 
-                dialog={this.state.activeDialog}
+                activeDialog={this.state.activeDialog}
               />
             </div>
           </div>

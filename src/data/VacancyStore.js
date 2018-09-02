@@ -2,11 +2,9 @@ import Immutable from "immutable";
 import { ReduceStore } from "flux/utils";
 import {
   RECEIVE_VACANCIES_LIST,
-  ADD_VACANCY,
   UPDATE_VACANCY
 } from "./ActionTypes";
 import _Dispatcher from "./_Dispatcher";
-import Actions from './Actions';
 
 class VacancyStore extends ReduceStore {
   constructor() {
