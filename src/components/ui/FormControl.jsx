@@ -25,12 +25,15 @@ class FormControl extends Component {
   
     this.state = {
       value: props.defaultValue,
+      showLoader: false,
+      showSuccess: false,
     }
   }
 
   onChangeInput = () => {
     this.setState({
-      value: this.input.value
+      value: this.input.value,
+      showSuccess: false,
     });
 
     if (typeof this.props.onChange === 'function') {
@@ -41,7 +44,14 @@ class FormControl extends Component {
         if (this.changeInputCounter === 0) {
           let vv = {};
           vv[this.input.getAttribute('name')] = this.input.value;
-          this.props.onChange(vv);
+
+          this.setState({ showLoader: true });
+          this.props.onChange(vv).then(() => {
+            this.setState({ 
+              showLoader: false,
+              showSuccess: true
+            });
+          });
         }
       }, timeoutChangeInput);
     }
@@ -49,6 +59,8 @@ class FormControl extends Component {
 
   render () {
     let cmp = null;
+    let showLoader = this.state.showLoader;
+    let showSuccess = this.state.showSuccess;
     switch (this.props.formGroupType) {
       case 'horizontal':
         cmp = (
@@ -60,18 +72,24 @@ class FormControl extends Component {
               }
             </div>
             <div className={this.props.cols[1] || 'col-auto'}>
-              {this.props.type === 'textarea'
-                ? <textarea id={this.props.label} rows="5" name={this.props.name} className="form-control"
-                  value={this.state.value}
-                  onChange={this.onChangeInput}
-                  ref={(input) => { this.input = input; }}
-                />
-                : <input id={this.props.label} name={this.props.name} type={this.props.type} className="form-control"
-                  value={this.state.value}
-                  onChange={this.onChangeInput}
-                  ref={(input) => { this.input = input; }}
-                />
-              }
+              <div style={{ position: 'relative' }}>
+                {!showLoader || <i className="fa fa-spinner text-warning fa-pulse form-status-icon"></i>}
+                {!showSuccess || <i className="fa fa-check text-success form-status-icon"></i>}
+                
+                {this.props.type === 'textarea'
+                  ? <textarea id={this.props.id} rows="5" name={this.props.name} className="form-control"
+                    value={this.state.value}
+                    onChange={this.onChangeInput}
+                    ref={(input) => { this.input = input; }}
+                  />
+                  : <input id={this.props.id} name={this.props.name} type={this.props.type} className="form-control"
+                    value={this.state.value}
+                    onChange={this.onChangeInput}
+                    ref={(input) => { this.input = input; }}
+                  />
+                }
+              </div>
+
               {this.props.errorMessage
                 ? <small className="text-danger">{this.props.errorMessage}</small>
                 : null
@@ -88,18 +106,24 @@ class FormControl extends Component {
               ? <label htmlFor={this.props.label} className="settings__label">{this.props.label}</label>
               : null
             }
-            {this.props.type === 'textarea'
-              ? <textarea id={this.props.label} rows="5" name={this.props.name} className="form-control"
-                value={this.state.value}
-                onChange={this.onChangeInput}
-                ref={(input) => { this.input = input; }}
-              />
-              : <input id={this.props.label} name={this.props.name} type={this.props.type} className="form-control"
-                value={this.state.value}
-                onChange={this.onChangeInput}
-                ref={(input) => { this.input = input; }}
-              />
-            }
+            <div style={{ position: 'relative' }}>
+              {!showLoader || <i className="fa fa-spinner text-warning fa-pulse form-status-icon"></i>}
+              {!showSuccess || <i className="fa fa-check text-success form-status-icon"></i>}
+
+              {this.props.type === 'textarea'
+                ? <textarea id={this.props.id} rows="5" name={this.props.name} className="form-control"
+                  value={this.state.value}
+                  onChange={this.onChangeInput}
+                  ref={(input) => { this.input = input; }}
+                />
+                : <input id={this.props.id} name={this.props.name} type={this.props.type} className="form-control"
+                  value={this.state.value}
+                  onChange={this.onChangeInput}
+                  ref={(input) => { this.input = input; }}
+                />
+              }
+            </div>
+
             {this.props.errorMessage
               ? <small className="text-danger">{this.props.errorMessage}</small>
               : null

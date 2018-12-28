@@ -6,6 +6,11 @@ import Actions from '../../../data/Actions/messages';
 
 import MessagesListItem from './MessagesListItem';
 
+import { notyConfig } from '../../../config';
+
+const Noty = require('noty');
+Noty.overrideDefaults(notyConfig);
+
 // let _get = require('../../../inc/get2obj')();
 
 class MessagesList extends Component {
@@ -28,6 +33,7 @@ class MessagesList extends Component {
       onUpdateMessage: Actions.updateMessage,
       onReceiveMessages: Actions.receiveMessages,
       onReceiveDialogList: Actions.receiveDialogList,
+      onReadMessages: Actions.readMessages,
       messages: MessagesStore.getState().get('messages'),
       totalMessages: MessagesStore.getState().get('totalMessages'),
     };
@@ -83,27 +89,23 @@ class MessagesList extends Component {
     let unreadingCount = 0;
     let readingCount = 0;
     let messages = this.state.messages;
+    let dialog_id = this.props.activeDialog.dialog_id
     for (let i in messages) {
       let message = messages[i];
       if (!message.is_read && message.your_id !== message.sender) {
         unreadingCount++;
       }
     }
-    for (let i in messages) {
-      let message = messages[i];
-      if (!message.is_read && message.your_id !== message.sender) {
-        this.state.onUpdateMessage(message.id, {
-          is_read: 1,
-          not_notify: true,
-        }).then(() => {
-          if (++readingCount >= unreadingCount) {
-            this.state.onReceiveDialogList();
-            this.state.onReceiveMessages(this.props.activeDialog.dialog_id).then(() => {
-              this.scrollMessagesWrapper();
-            });
-          }
-        });
-      }
+
+    if (unreadingCount > 0) {
+      this.state.onReadMessages(dialog_id, {
+        not_notify: true,
+      }).then(() => {
+        if (++readingCount >= unreadingCount) {
+          this.state.onReceiveDialogList();
+          this.state.onReceiveMessages(dialog_id);
+        }
+      });
     }
   }
 
@@ -114,6 +116,7 @@ class MessagesList extends Component {
     this.state.onAddMessage(dialog.user_id, {
       dialog_id: dialog.dialog_id,
       message: this.inputs.message.value,
+      not_notify: true,
     }).then(() => {
       this.inputs.message.value = '';
       this.inputs.message.disabled = false;
@@ -132,10 +135,21 @@ class MessagesList extends Component {
 
         this.state.onReceiveDialogList({
           not_loader: true
+        }).then((dialogs) => {
+          for (let i in dialogs) {
+            if (parseInt(dialogs[i].unread_messages, 10) > 0) {
+              new Noty({
+                text: dialogs[i].last_message,
+                type: 'success',
+              }).show();
+            }
+          }
         });
         this.state.onReceiveMessages(dialog_id, {
           not_loader: true,
-          limit: this.state.page * this.state.limit
+          only_new: true,
+        }).then(() => {
+          this.scrollMessagesWrapper();
         });
       }, 5000);
     });

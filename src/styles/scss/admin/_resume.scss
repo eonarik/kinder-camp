@@ -1,0 +1,75 @@
+.resume {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+
+  &__avatar {
+    background: #CCC;
+    color: #FFF;
+    font-size: 80px;
+    line-height: 120px;
+    text-align: center;
+    flex: 0 0 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    margin-right: 40px;
+
+    img {
+      display: block;
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
+    }
+  }
+
+  &__name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  &__place {
+    font-size: 15px;
+  }
+
+  &__status {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 11px;
+    font-style: italic;
+    color: #000;
+    background: #CCC;
+    padding: 3px 15px;
+    border-radius: 30px;
+
+    &--success {
+      background: $color-green;
+    }
+
+    &--danger {
+      background: $color-red;
+    }
+
+    &--warning {
+      background: $color-orange;
+    }
+  }
+
+  &__type {
+    font-size: 13px;
+    color: $color-green;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__views {
+    font-size: 13px;
+    color: #999;
+  }
+}

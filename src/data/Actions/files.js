@@ -7,10 +7,10 @@ import request from '../../inc/request';
 let Actions = {};
 
 // files
-Actions.receiveFilesList = function ({ camp_id, types }) {
+Actions.receiveFilesList = function ({ resource_id, types }) {
   return new Promise((resolve, reject) => {
     request(IMAGES.LIST, {
-      camp_id,
+      resource_id,
       types
     }, (response) => {
       resolve(response.object);
@@ -27,12 +27,12 @@ Actions.deleteFile = function (id) {
     });
   });
 };
-Actions.addFile = function ({ camp_id, file, type }) {
+Actions.addFile = function ({ resource_id, file, type }) {
   return new Promise((resolve, reject) => {
     let post = new FormData();
     post.append('file', file);
     post.append('type_id', type);
-    post.append('camp_id', camp_id);
+    post.append('resource_id', resource_id);
     request(IMAGES.CREATE, post, (response) => {
       resolve(response.object);
     });

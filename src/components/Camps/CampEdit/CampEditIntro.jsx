@@ -28,8 +28,8 @@ class CampEditIntro extends Component {
 
     this.state = {
       _isChangeName: false,
-      // _obj: props.obj,
-      _images: [],
+      _images: props.obj.camp_images || [],
+      imagesLoading: false,
     }
   }
 
@@ -53,14 +53,15 @@ class CampEditIntro extends Component {
     this.inputs.image.click();
     this.inputs.image.onchange = (e) => {
       this.state.onAddFile({
-        camp_id: this.props.obj.id,
+        resource_id: this.props.obj.id,
         file: e.target.files[0],
         type,
       }).then((addedImage) => {
         let _images = [...this.state._images];
         _images.push(addedImage);
         this.setState({
-          _images
+          _images,
+          imagesLoading: false
         });
       });
       this.inputs.image.value = null;
@@ -84,18 +85,23 @@ class CampEditIntro extends Component {
     }
   }
 
-  componentDidMount = () => {
-    if (!this.state._images.length) {
-      this.state.onReceiveFilesList({ 
-        camp_id: this.props.obj.id, 
-        types: [1,2] 
-      }).then((list) => {
-        this.setState({
-          _images: list
-        });
-      });
-    }
-  }
+  // componentDidMount = () => {
+  //   if (!this.state._images.length) {
+  //     this.setState({
+  //       imagesLoading: true
+  //     });
+  //     this.state.onReceiveFilesList({ 
+  //       resource_id: this.props.obj.id, 
+  //       types: [1,2] 
+  //     }).then((list) => {
+  //       console.log(list)
+  //       this.setState({
+  //         _images: list,
+  //         imagesLoading: false
+  //       });
+  //     });
+  //   }
+  // }
 
   render() {
     let obj = this.props.obj;
@@ -133,7 +139,7 @@ class CampEditIntro extends Component {
             {!this.state._isChangeName
               ? (
                 <div className="admin__intro-title">
-                  <span>{obj.name}</span> &nbsp;
+                  <span>{obj.pagetitle}</span> &nbsp;
                   <span className="btn btn-xs text-info" 
                     data-toggle="tooltip" title={_TRANS('all', 'edit')} onClick={this.onChangeName.bind(this, true)}>
                     <i className="fa fa-pencil"></i>
@@ -142,8 +148,8 @@ class CampEditIntro extends Component {
               )
               : (
                 <div className="admin__intro-title">
-                  <input name="name" type="text" defaultValue={obj.name}
-                    ref={(input) => { this.inputs.name = input; }}
+                  <input name="pagetitle" type="text" defaultValue={obj.pagetitle}
+                    ref={(input) => { this.inputs.pagetitle = input; }}
                   /> &nbsp;
                   <span className="btn btn-xs btn-success"
                     data-toggle="tooltip" title={_TRANS('all', 'apply')} onClick={this.onUpdateName}>
@@ -158,16 +164,16 @@ class CampEditIntro extends Component {
             }
             <div className="admin__intro-descr">
               <div>{_TRANS('camp', 'id_ucase')} <span>{obj.external_id}</span> </div>
-              <div>{_TRANS('camp', 'inn')} <span>{obj.inn}</span> </div>
+              <div>{_TRANS('camp', 'inn')} <span>{obj.camp_inn}</span> </div>
             </div>
             {obj.address && (
               <div className="admin__intro-point">
                 <i className="text-info fa fa-map-marker"></i>
-                <span>&nbsp;&nbsp;{obj.address}</span>
+                <span>&nbsp;&nbsp;{obj.camp_address}</span>
               </div>
             )}
           </div>
-          {obj.status_id && (
+          {obj.camp_status_id && (
             <div className="admin__intro-status">
               <div className="admin__intro-status-badge" style={{
                 backgroundColor: obj.status_color
@@ -175,14 +181,17 @@ class CampEditIntro extends Component {
             </div>
           )}
         </div>
-        {_images && (
-          <div className="admin__intro-thumbs">
-            {_ext_images}
-            {_images.length > 0 && (
-              <div className="admin__intro-thumb admin__intro-thumb--add" data-toggle="tooltip" title={_TRANS('all', 'add_photo')} onClick={this.onAddImage.bind(this, 2)}></div>
-            )}
-          </div>
-        )}
+        {this.state.imagesLoading
+          ? <p>Загрузка изображений...</p>
+          : _images && (
+            <div className="admin__intro-thumbs">
+              {_ext_images}
+              {_images.length > 0 && (
+                <div className="admin__intro-thumb admin__intro-thumb--add" data-toggle="tooltip" title={_TRANS('all', 'add_photo')} onClick={this.onAddImage.bind(this, 2)}></div>
+              )}
+            </div>
+          )
+        }
         <input type="file"
           ref={(input) => { this.inputs.image = input; }}
           style={{ display: 'none' }}

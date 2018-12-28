@@ -51,15 +51,27 @@ class VacancyAddForm extends Component {
     let obj = this.props.obj;
     let errors = this.state.errors;
     let camps = this.state.camps;
-    let campsOption = [
+    let _campsOption = [
       <option key="0" value="">Выбрать из существующих</option>
     ];
-    for(let i in camps) {
-      let camp = camps[i];
-      campsOption.push(
-        <option key={camp.id} value={camp.id}
-         selected={obj && obj.tvs.camp_id && obj.tvs.camp_id.value === camp.id}
-        >{camp.name}</option>
+    let _selectCamps = [];
+    if (camps && camps.length) {
+      for(let i in camps) {
+        let camp = camps[i];
+        _campsOption.push(
+          <option key={camp.id} value={camp.id}>{camp.pagetitle}</option>
+        );
+      }
+      _selectCamps.push(
+        <select 
+          key="select-camps" 
+          className="form-control"
+          name="camp_id"
+          id="vacancy-camp"
+          defaultValue={obj.tvs.camp_id.value}
+        >
+          {_campsOption}
+        </select>
       );
     }
 
@@ -98,9 +110,7 @@ class VacancyAddForm extends Component {
                   <label htmlFor="vacancy-camp">Место работы</label>
                 </div>
                 <div className="col-xs-12 col-md-8">
-                  <select className="form-control" name="camp_id" id="vacancy-camp">
-                    {campsOption}
-                  </select>
+                  {_selectCamps}
                   {errors.camp_id
                     ? <small className="text-danger">{errors.camp_id}</small>
                     : null

@@ -26,18 +26,6 @@ class MessagesUsers extends Component {
 
   componentDidMount = () => {
 
-    // отреагируем на кнопки истории
-    // window.onpopstate = (event) => {
-    //   if (
-    //     event.state 
-    //     && typeof event.state.dialog_id !== 'undefined'
-    //   ) {
-    //     this.setState({
-    //       activeDialogId: event.state.dialog_id
-    //     });
-    //   }
-    // };
-
     if (!this.props.dialogs || !this.props.dialogs.length) {
       this.props.onReceiveDialogList().then((dialogs) => {
         this.setState({

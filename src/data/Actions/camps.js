@@ -71,12 +71,14 @@ Actions.updateCamp = function (id, nextProps = null) {
       id,
       ...nextProps
     }, (response) => {
-      _Dispatcher.dispatch({
-        type: UPDATE_CAMP,
-        updatedCampProps: response.object
+      Actions.receiveCampsList().then(() => {
+        _Dispatcher.dispatch({
+          type: UPDATE_CAMP,
+          updatedCampProps: response.object
+        });
+        
+        resolve(response.object);
       });
-      
-      resolve(response.object);
     });
   });
 };

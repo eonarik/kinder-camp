@@ -28,6 +28,17 @@ Actions.receiveDialogList = function (options = {}) {
   });
 };
 
+Actions.readMessages = function (dialog_id, options = {}) {
+  return new Promise((resolve, reject) => {
+    request(MESSAGES.READ, {
+      dialog_id,
+      ...options
+    }, (response) => {
+      resolve(response.object);
+    });
+  });
+};
+
 Actions.setDialog = function (dialog) {
   if (_get.d !== dialog.dialog_id) {
     window.history.pushState({

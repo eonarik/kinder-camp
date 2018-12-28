@@ -63,4 +63,11 @@ export const MESSAGES = {
   UPDATE: host + apiPrefix + 'messages/update',
   LIST: host + apiPrefix + 'messages/list',
   DIALOG_LIST: host + apiPrefix + 'messages/dialoglist',
+  READ: host + apiPrefix + 'messages/read',
+};
+export const RESUMES = {
+  CREATE: host + apiPrefix + 'resumes/create',
+  UPDATE: host + apiPrefix + 'resumes/update',
+  LIST: host + apiPrefix + 'resumes/list',
+  FIELD_LIST: host + apiPrefix + 'resumes/field_list',
 };

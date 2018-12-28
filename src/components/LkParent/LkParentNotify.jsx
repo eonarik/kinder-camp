@@ -44,7 +44,7 @@ class LkParentNotify extends Component {
               onChange={this.inputChange}
               checked={this.state.notify_sms}
             />
-            <label htmlFor="settings-notify_sms">Уведомление по SMS о статусе броней</label>
+            <label htmlFor="settings-notify_sms">Уведомления по SMS</label>
           </div>
         </div>
       </div>

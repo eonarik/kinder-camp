@@ -10,6 +10,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 import Lk from './components/Lk';
 import LkParent from './components/LkParent';
+import LkVacancy from './components/LkVacancy';
 import Camps from './components/Camps';
 import Reservations from './components/Reservations';
 import ReservationsParent from './components/ReservationsParent';
@@ -17,6 +18,7 @@ import Vacancies from './components/Vacancies';
 import Reviews from './components/Reviews';
 import MyReviews from './components/MyReviews';
 import Messages from './components/Messages';
+import Resumes from './components/Resumes';
 
 import './styles/scss/style.css';
 
@@ -25,6 +27,7 @@ import _TRANS from "./const/trans";
 const tpls = {
   Lk,
   LkParent,
+  LkVacancy,
   Camps,
   Reservations,
   ReservationsParent,
@@ -32,6 +35,7 @@ const tpls = {
   Reviews,
   MyReviews,
   Messages,
+  Resumes,
 };
 
 class App extends Component {
@@ -56,32 +60,21 @@ class App extends Component {
 
     this.state = {
       statusMessages: [],
-      currentTabIndex: 0,
     }
   }
 
-  setTab = (index, tab, addHistory, e) => {
-    // e.preventDefault();
-    this.setState({
-      currentTabIndex: index,
-    });
+  setTab = (index) => {
+    this.forceUpdate();
   }
 
   componentDidMount = () => {
-    if (!this.state.menu || !this.state.menu.length) {
-      this.state.onReceiveMenu().then((menu) => {
-        let index = 0;
-        for (let i in menu) {
-          if (menu[i].uri === window.location.pathname) {
-            index = i;
-            break;
-          }
-        }
+    // отреагируем на кнопки истории
+    window.onpopstate = (event) => {
+      this.forceUpdate();
+    };
 
-        this.setState({
-          currentTabIndex: index
-        });
-      });
+    if (!this.state.menu || !this.state.menu.length) {
+      this.state.onReceiveMenu();
     }
     if (!this.state.userProfile || !Object.keys(this.state.userProfile).length) {
       this.state.onReceiveUserProfile();
@@ -96,13 +89,19 @@ class App extends Component {
 
     let _tabContent = [];
     let _tabs = [];
-    const _currentTabIndex = this.state.currentTabIndex
-    const _currentTab = tabs[_currentTabIndex];
+    let _currentTab = {};
     for (let i in tabs) {
       let tab = tabs[i];
+      let path = '/' + tab.uri;
+      let isActive = window.location.pathname === path;
+
+      if (isActive) {
+        _currentTab = tab;
+      }
+
       _tabs.push(
-        <li key={tab.id} className={_currentTabIndex === i ? 'active' : ''}>
-          <Link to={'/' + tab.uri} onClick={this.setTab.bind(this, i, tab, true)}>{tab.pagetitle}</Link>
+        <li key={tab.id} className={isActive ? 'active' : ''} onClick={this.setTab}>
+          <Link to={path}>{tab.pagetitle}</Link>
         </li>
       );
 
@@ -110,10 +109,11 @@ class App extends Component {
         let Tpl = tpls[tab.tpl];
 
         switch (tab.tpl) {
-          case 'LkParent':          
           case 'Lk':
+          case 'LkParent':          
+          case 'LkVacancy':          
             _tabContent.push(
-              <Route key={tab.id} exact path={'/' + tab.uri} render={(props) => (
+              <Route key={tab.id} exact path={path} render={(props) => (
                 <Tpl 
                   {...props}
                   userProfile={this.state.userProfile}
@@ -125,8 +125,11 @@ class App extends Component {
           
           default:
             _tabContent.push(
-              <Route key={tab.id} exact path={'/' + tab.uri} render={(props) => (
-                <Tpl {...props} />
+              <Route key={tab.id} exact path={path} render={(props) => (
+                <Tpl
+                  {...props}
+                  userProfile={this.state.userProfile}
+                />
               )} />
             );
         }

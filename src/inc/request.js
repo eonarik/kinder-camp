@@ -2,9 +2,9 @@ import Actions from '../data/Actions/request';
 import { notyConfig } from '../config';
 
 // заменить на получение токена с сервера!
-// const userToken = '131a6f18175209af3e2f16a3150f960d';
-const userToken = '705b9cecdfa4c75bc4d4fd629b18b849';
-// const userToken = 'b9009c6cc36018178a7e906ac749651a';
+const userToken = '131a6f18175209af3e2f16a3150f960d'; // лагерь
+// const userToken = '705b9cecdfa4c75bc4d4fd629b18b849'; // родитель
+// const userToken = 'b9009c6cc36018178a7e906ac749651a'; // соискатель
 
 const _TRANS = require('../const/trans');
 

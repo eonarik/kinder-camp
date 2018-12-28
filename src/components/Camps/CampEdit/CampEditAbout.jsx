@@ -4,37 +4,15 @@ import React, { Component } from 'react';
 // import CampStore from "../../../data/CampStore.js";
 // import Actions from '../../../data/Actions';
 
+import FormControl from '../../ui/FormControl';
+
 import _TRANS from "../../../const/trans";
-import { timeoutChangeInput } from "../../../config";
 
 class CampEditAbout extends Component {
-  inputs = {};
-  changeInputCounter = 0;
-
-  // static getStores() {
-  //   return [CampStore];
-  // }
-
-  // static calculateState(prevState) {
-  //   return {
-  //     // onUpdateCamp: Actions.updateCamp,
-  //   };
-  // }
-
-  onChangeInput = () => {
-    this.changeInputCounter++;
-
-    setTimeout(() => {
-      this.changeInputCounter--;
-      if (this.changeInputCounter === 0) {
-        // update
-        let values = [];
-        for (let key in this.inputs) {
-          values[key] = this.inputs[key].value;
-        }
-        this.props.onUpdateCamp(this.props.obj.id, values);
-      }
-    }, timeoutChangeInput);
+  onChangeInput = (values) => {
+    return new Promise((resolve, reject) => {
+      this.props.onUpdateCamp(this.props.obj.id, values).then(resolve);
+    });
   }
 
   render() {
@@ -43,55 +21,60 @@ class CampEditAbout extends Component {
     return (
       <div>
         <h5>О лагере</h5>
-        <div className="row flex-row flex-row--vcenter form-group">
-          <div className="col-xs-12 col-md-4">
-            <label htmlFor="settings-short_name" className="settings__label">{_TRANS('camp', 'short_name')}</label>
-          </div>
-          <div className="col-xs-12 col-md-8">
-            <input id="settings-short_name" name="name" type="text" className="form-control"
-              defaultValue={obj.name}
-              ref={(input) => { this.inputs.name = input; }}
-              onChange={this.onChangeInput}
-            />
-          </div>
-        </div>
-        <div className="row flex-row flex-row--vcenter form-group">
-          <div className="col-xs-12 col-md-4">
-            <label htmlFor="settings-legal_name" className="settings__label">{_TRANS('camp', 'legal_name')}</label>
-          </div>
-          <div className="col-xs-12 col-md-8">
-            <input id="settings-legal_name" name="legal_name" type="text" className="form-control" 
-              defaultValue={obj.legal_name} 
-              ref={(input) => { this.inputs.legal_name = input; }}
-              onChange={this.onChangeInput}
-            />
-          </div>
-        </div>
-        <div className="row flex-row flex-row--vcenter form-group">
-          <div className="col-xs-12 col-md-4">
-            <label htmlFor="settings-inn" className="settings__label">{_TRANS('camp', 'inn')}</label>
-          </div>
-          <div className="col-xs-12 col-md-8">
-            <input id="settings-inn" name="inn" type="text" className="form-control" 
-              defaultValue={obj.inn}
-              ref={(input) => { this.inputs.inn = input; }}
-              onChange={this.onChangeInput}
-            />
-          </div>
-        </div>
-        <div className="row flex-row flex-row--vcenter form-group">
-          <div className="col-xs-12 col-md-4">
-            <label htmlFor="settings-foundation_date" className="settings__label">{_TRANS('camp', 'foundation_date')}</label>
-          </div>
-          <div className="col-xs-12 col-md-8">
-            <input id="settings-foundation_date" name="foundation_date" type="text" className="form-control" 
-              defaultValue={obj.foundation_date}
-              ref={(input) => { this.inputs.foundation_date = input; }}
-              onChange={this.onChangeInput}
-              placeholder="YYYY-MM-DD"
-            />
-          </div>
-        </div>
+
+        <FormControl
+          formGroupType="horizontal"
+          cols={[
+            'col-xs-12 col-md-4',
+            'col-xs-12 col-md-8'
+          ]}
+          id="settings-pagetitle"
+          label={_TRANS('camp', 'short_name')}
+          name="pagetitle"
+          defaultValue={obj.pagetitle}
+          onChange={this.onChangeInput}
+        />
+
+        <FormControl
+          formGroupType="horizontal"
+          cols={[
+            'col-xs-12 col-md-4',
+            'col-xs-12 col-md-8'
+          ]}
+          id="settings-camp_legal_name"
+          label={_TRANS('camp', 'legal_name')}
+          name="camp_legal_name"
+          defaultValue={obj.camp_legal_name}
+          onChange={this.onChangeInput}
+        />
+
+        <FormControl
+          formGroupType="horizontal"
+          cols={[
+            'col-xs-12 col-md-4',
+            'col-xs-12 col-md-8'
+          ]}
+          id="settings-camp_inn"
+          label={_TRANS('camp', 'inn')}
+          name="camp_inn"
+          defaultValue={obj.camp_inn}
+          onChange={this.onChangeInput}
+        />
+
+        <FormControl
+          formGroupType="horizontal"
+          cols={[
+            'col-xs-12 col-md-4',
+            'col-xs-12 col-md-8'
+          ]}
+          id="settings-camp_foundation_date"
+          label={_TRANS('camp', 'foundation_date')}
+          name="camp_foundation_date"
+          type="date"
+          plcaholder="YYYY-MM-DD"
+          defaultValue={obj.camp_foundation_date}
+          onChange={this.onChangeInput}
+        />
       </div>
     );
   }

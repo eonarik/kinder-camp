@@ -10,7 +10,7 @@ class CampEditAddress extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      description_input_value: props.obj.address_description,
+      description_input_value: props.obj.camp_address_description,
     }
   }
 
@@ -42,7 +42,7 @@ class CampEditAddress extends Component {
         <div className="form-group">
           <h5>{_TRANS('camp', 'place_address')}</h5>
           <input id="settings-address" name="address" type="text" className="form-control" placeholder={_TRANS('camp', 'input_address')} 
-            defaultValue={obj.address}
+            defaultValue={obj.camp_address}
             ref={(input) => { this.inputs.address = input; }}
             onChange={this.onChangeInput}
           />

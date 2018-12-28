@@ -1,7 +1,6 @@
 @import '../../fonts/futura-round/style.css';
 @import '../../vendor/font.awesome/css/font-awesome-4.5.0.min.css';
 @import "../../../node_modules/noty/src/noty.scss";
-// @import "../../../node_modules/noty/src/themes/mint.scss";
 
 @import 'variables';
 
@@ -9,6 +8,8 @@
 @import 'ui/loader';
 @import 'ui/table';
 @import 'ui/custom-checkbox';
+@import 'ui/offsets';
+@import 'ui/card-block';
 
 @import 'global/global';
 @import 'global/owl-carousel';
@@ -43,3 +44,4 @@
 @import 'admin/reviews';
 @import 'admin/my-review';
 @import 'admin/messages';
+@import 'admin/resume';

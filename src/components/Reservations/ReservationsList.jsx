@@ -6,15 +6,9 @@ import CampStore from "../../data/CampStore";
 import Actions from '../../data/Actions/reservations';
 import ActionsCamps from '../../data/Actions/camps';
 
-import ReservationsListItem from './ReservationsListItem';
-
 class ReservationsList extends Component {
 
   inputs = {}
-
-  static props = {
-    ItemTpl: ReservationsListItem,
-  }
 
   static getStores() {
     return [ReservationStore, CampStore];
@@ -56,17 +50,19 @@ class ReservationsList extends Component {
   reservationsRender = () => {
     let _reservations = [];
     let ItemTpl = this.props.ItemTpl;
-    for (let i in this.state.reservations) {
-      let reservation = this.state.reservations[i];
-      _reservations.push(
-        <ItemTpl 
-          key={reservation.id}
-          obj={reservation}
-          onUpdateReservation={this.state.onUpdateReservation}
-          onUpdateReservationsList={this.onUpdateReservationsList}
-          statuses={this.state.statuses}
-        />
-      );
+    if (typeof ItemTpl !== 'undefined') {
+      for (let i in this.state.reservations) {
+        let reservation = this.state.reservations[i];
+        _reservations.push(
+          <ItemTpl 
+            key={reservation.id}
+            obj={reservation}
+            onUpdateReservation={this.state.onUpdateReservation}
+            onUpdateReservationsList={this.onUpdateReservationsList}
+            statuses={this.state.statuses}
+          />
+        );
+      }
     }
 
     return _reservations;
