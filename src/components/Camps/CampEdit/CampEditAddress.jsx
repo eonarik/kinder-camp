@@ -1,64 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import _TRANS from "../../../const/trans";
-import { timeoutChangeInput } from "../../../config";
+
+import FormControl from "../../ui/FormControl";
+import InputMap from "../../ui/InputMap";
 
 class CampEditAddress extends Component {
-  inputs = {};
-  changeInputCounter = 0;
-
-  constructor (props) {
-    super(props);
-    this.state = {
-      description_input_value: props.obj.camp_address_description,
-    }
-  }
-
-  onChangeInput = (event) => {
-    this.changeInputCounter++;
-
-    this.setState({
-      description_input_value: event.target.value
+  inputChange = values => {
+    return new Promise(resolve => {
+      this.props.onUpdateCamp(this.props.obj.id, values).then(resolve);
     });
+  };
 
-    setTimeout(() => {
-      this.changeInputCounter--;
-      if (this.changeInputCounter === 0) {
-        // update
-        let values = [];
-        for (let key in this.inputs) {
-          values[key] = this.inputs[key].value;
-        }
-        this.props.onUpdateCamp(this.props.obj.id, values);
-      }
-    }, timeoutChangeInput);
-  }
-  
   render() {
     let obj = this.props.obj;
 
+    // if (obj.camp_address) {
+    //   let addrObj = JSON.parse(obj.camp_address);
+    //   obj.camp_address = addrObj.address;
+    // }
+
     return (
       <div>
-        <div className="form-group">
-          <h5>{_TRANS('camp', 'place_address')}</h5>
-          <input id="settings-address" name="address" type="text" className="form-control" placeholder={_TRANS('camp', 'input_address')} 
-            defaultValue={obj.camp_address}
-            ref={(input) => { this.inputs.address = input; }}
-            onChange={this.onChangeInput}
-          />
-          <div className="settings__map-empty">
-            {_TRANS('all', 'input_address_hint')}
-          </div>
-        </div>
+        <InputMap
+          label={_TRANS("camp", "place_address")}
+          id="office-camp_address"
+          name="camp_address"
+          defaultValue={obj.camp_address}
+          onChange={this.inputChange}
+        />
 
-        <div className="form-group">
-          <label htmlFor="settings-description">{_TRANS('camp', 'office_description')}</label>
-          <textarea className="form-control" name="address_description" id="settings-description" rows="3" placeholder={_TRANS('camp', 'office_description_sample')} 
-            value={this.state.description_input_value}
-            ref={(input) => { this.inputs.address_description = input; }}
-            onChange={this.onChangeInput}
-          ></textarea>
-        </div>
+        <FormControl
+          label={_TRANS("camp", "office_description")}
+          id="settings-camp_address_description"
+          type="textarea"
+          name="camp_address_description"
+          defaultValue={obj.camp_address_description}
+          onChange={this.inputChange}
+        />
       </div>
     );
   }

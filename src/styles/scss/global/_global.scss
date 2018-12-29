@@ -129,6 +129,11 @@ h,.h {
     display: flex;
     flex-flow: row wrap;
 
+    &:before,
+    &:after {
+        display: none;
+    }
+
     &--nowrap {
         flex-wrap: nowrap;
     }
