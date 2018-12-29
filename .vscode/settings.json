@@ -1,10 +1,4 @@
 {
     "editor.tabSize": 2,
-    "html.format.endWithNewline": true,
-    "emmet.includeLanguages": {
-        "vue-html": "html",
-        "javascript": "javascriptreact"
-    },
-    "emmet.showAbbreviationSuggestions": false,
-    "typescript.locale": "ru"
+    "html.format.endWithNewline": true
 }
